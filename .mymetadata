@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="FurnitureAdm"
+  id="myeclipse.1582964521861"
+  context-root="/FurnitureAdm"
+  j2ee-spec="6.0"
+  archive="FurnitureAdm.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+
