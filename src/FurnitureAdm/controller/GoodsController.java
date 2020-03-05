@@ -1,11 +1,13 @@
 package FurnitureAdm.controller;
 
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
+
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap; 
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -13,24 +15,29 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import FurnitureAdm.bean.Category;
+import com.alibaba.fastjson.JSON;
+
 import FurnitureAdm.service.category.CategoryService;
+import FurnitureAdm.bean.goods;
+import FurnitureAdm.service.goods.GoodsService;
 
 @Controller
-public class CategoryController {
-	
+public class GoodsController {
+
+	@Autowired
+    @Qualifier("GoodsService")
+    private GoodsService goodsService;
 	@Autowired
 	@Qualifier("CategoryService")
 	private CategoryService categoryService;
-	
 	/**
-     * 返回/category的查询列表
+     * 返回/goods列表
      */	
-    @RequestMapping("/getcategroyList")
-    @ResponseBody
-    public Map<String, Object> getCategroyList(Category category, Integer page, Integer pageSize, String query){
-		List<Category> categoryList = new ArrayList<Category>();
-		List<Category> AllCategoryList = new ArrayList<Category>();
+	@RequestMapping("/getgoodsList")
+	@ResponseBody  
+	public Map<String, Object> getgoodsList(goods Goods,Integer page, Integer pageSize, String query) {
+		List<goods> goodsList = new ArrayList<goods>();
+		List<goods> AllgoodsList = new ArrayList<goods>();
 		Map<String, Object> result = new HashMap<String, Object>();
 		Map<String, Object> map = new HashMap<String, Object>();
 		int code,total;
@@ -38,16 +45,15 @@ public class CategoryController {
 		try{
 			if(page != 0 & pageSize != 0){
 				if(query == ""){
-					categoryList = categoryService.CategoryList(category, page, pageSize);
-					AllCategoryList = categoryService.AllCategoryList(category);
-					
+					goodsList = goodsService.GoodsList(Goods, page, pageSize);
+					AllgoodsList = goodsService.AllGoodsList(Goods);
 				}else{
-					categoryList = categoryService.CategoryNameCategoryList(category, page, pageSize, query);
-					AllCategoryList = categoryService.CategoryNameAllCategoryList(category, query);
+					goodsList = goodsService.SearchGoodsList(Goods, page, pageSize, query);
+					AllgoodsList = goodsService.SearchAllGoodsList(Goods, query);
 				}
-				total = AllCategoryList.size();
+				total = AllgoodsList.size();
 				result.put("total", total);
-            	result.put("list", categoryList);
+            	result.put("goodsList", goodsList);
             	code=200;  
     			state="success";
     			message="成功";
@@ -60,7 +66,7 @@ public class CategoryController {
 			}else{
 				total=0;
         		result.put("total", total);
-            	result.put("list", categoryList);
+            	result.put("goodsList", goodsList);
             	code=0;
     			state="fail";
     			message="失败";
@@ -71,11 +77,12 @@ public class CategoryController {
 //    			System.out.println(map);
         		return map;
 			}
+			
 		}catch(Exception e){
 			System.out.println(e);
 			total=0;
     		result.put("total", total);
-        	result.put("list", categoryList);
+        	result.put("goodsList", goodsList);
         	code=0;
 			state="fail";
 			message="失败";
@@ -86,28 +93,36 @@ public class CategoryController {
 //			System.out.println(map);
     		return map;
 		}
-    }
-    
-    /**
-     * 返回/category拿到详情
+	}
+	
+	/**
+     * 返回/goods详情
      */	
-    @RequestMapping("/getCategoryDetail")
+	@RequestMapping("/getgoodsDetail")
 	@ResponseBody  
-	public Map<String, Object> getCategoryDetail(Category category, Integer id) {
-		Map<String, Object> categoryDetail = new HashMap<String, Object>();
+	public Map<String, Object> getgoodsDetail(goods Goods, Integer id) {
+//		System.out.println(id);
+		Map<String, Object> goodsDetail = new HashMap<String, Object>();
+		Map<String, Object> category;
+		Map<String, Object> goodsDetailList = new HashMap<String, Object>();
 		Map<String, Object> map = new HashMap<String, Object>();
 		int code;
-		String state,message;	
+		String state,message;		
 		try{
-			if( id != 0){
-				categoryDetail = categoryService.CategoryDetail(category, id);
+			if(id != 0){
+				goodsDetail = goodsService.GoodsDetail(Goods, id);
+				Integer categoryID = 0;
+				categoryID = Integer.parseInt(goodsDetail.get("categoryID").toString());
+				category = categoryService.GetCategoryName(categoryID);
+				goodsDetailList.putAll(goodsDetail);
+				goodsDetailList.putAll(category);
 				code=200;
     			state="success";
     			message="成功";
     			map.put("code", code);
     			map.put("state", state);	
     			map.put("message", message);
-    			map.put("result", categoryDetail);
+    			map.put("result", goodsDetailList);
 //    			System.out.println(JSON.toJSONString(map));
         		return map;
 			}else{
@@ -117,7 +132,7 @@ public class CategoryController {
     			map.put("code", code);
     			map.put("state", state);	
     			map.put("message", message);
-    			map.put("result", categoryDetail);
+    			map.put("result", goodsDetailList);
 //    			System.out.println(map);
         		return map;
 			}
@@ -129,26 +144,26 @@ public class CategoryController {
 			map.put("code", code);
 			map.put("state", state);	
 			map.put("message", message);
-			map.put("result", categoryDetail);
+			map.put("result", goodsDetailList);
 //			System.out.println(map);
     		return map;
 		}
-		
-    }
-    
+	}
+	
+	
 	/**
-     * 实现/category修改
+     * 实现/goods修改功能
      */	
-    @RequestMapping("/categoryUpdate")
+	@RequestMapping("/updateGoods")
 	@ResponseBody  
-	public Map<String, Object> updateCategory(Integer id, String categoryName, String remark) {
+	public Map<String, Object> updateGoods(Integer id, String goodsName, String categoryID, String picInfo, String inPrice, String quantity,  String detail, String size, String color, String remark) {
 		Map<String, Object> result = new HashMap<String, Object>();
 		Map<String, Object> map = new HashMap<String, Object>();
 		int code;
 		String state, message;	
 		try{
 			if(id != 0){
-				categoryService.UpdateCategory(id, categoryName, remark);
+				goodsService.UpdateGoods(id, goodsName, categoryID, picInfo, inPrice, quantity, detail, size, color, remark);
 				message = "成功";
 				result.put("message", message);
             	code=200;
@@ -172,7 +187,7 @@ public class CategoryController {
     			map.put("result", result);
 //    			System.out.println(map);
         		return map;
-			}
+				}
 		}catch(Exception e){
 			System.out.println(e);
 			message = "失败";
@@ -187,42 +202,36 @@ public class CategoryController {
 //			System.out.println(map);
     		return map;
 		}
-    }
-    
+	}
 	/**
-     * 实现/category添加功能
+     * 实现/goods添加功能
      */	
-	@RequestMapping("/addCategory")
+	@RequestMapping("/AddGoods")
 	@ResponseBody  
-	
-	public Map<String, Object> addCategory(String categoryName, String remark) {
-//		System.out.println(categoryName+","+remark);
-		Map<String, Object> searchCategoryName = new HashMap<String, Object>();
+	public Map<String, Object> AddGoods(String goodsName, String categoryID, String picInfo,String inPrice, String quantity,  String detail, String size, String color, String remark) {
 		Map<String, Object> result = new HashMap<String, Object>();
 		Map<String, Object> map = new HashMap<String, Object>();
 		int code;
-		String state, message;	
+		String state, message;
 		try{
-			if(categoryName != null){
-				searchCategoryName = categoryService.SearchCategoryName(categoryName);
-				if(searchCategoryName == null){
-					categoryService.AddCategory(categoryName, remark);
-					message = "成功";
-					result.put("message", message);
-	            	code=200;
-	    			state="success";
-	    			message="成功";
-	    			map.put("code", code);
-	    			map.put("state", state);	
-	    			map.put("message", message);
-	    			map.put("result", result);
-//	    			System.out.println(JSON.toJSONString(map));
-	        		return map;
+			if(goodsName != null){
+
+				goodsService.AddGoods(goodsName, categoryID, picInfo, inPrice, quantity, detail, size, color, remark);
+				message = "成功";
+				result.put("message", message);
+	            code=200;
+	    		state="success";
+	    		message="成功";
+	    		map.put("code", code);
+	    		map.put("state", state);	
+	    		map.put("message", message);
+	    		map.put("result", result);
+//	    		System.out.println(JSON.toJSONString(map));
+	        	return map;
 				}else{
-					message = "此图书类别已存在！";
-//					result.put("flag", flag);
+					message = "失败";
 					result.put("message", message);
-	            	code=200;
+	            	code=0;
 	    			state="fail";
 	    			message="失败";
 	    			map.put("code", code);
@@ -232,20 +241,8 @@ public class CategoryController {
 //	    			System.out.println(map);
 	        		return map;
 				}
-			}else{
-				message = "失败";
-				result.put("message", message);
-            	code=0;
-    			state="fail";
-    			message="失败";
-    			map.put("code", code);
-    			map.put("state", state);	
-    			map.put("message", message);
-    			map.put("result", result);
-//    			System.out.println(map);
-        		return map;
-			}
-		}catch(Exception e ){
+			
+		}catch(Exception e){
 			System.out.println(e);
 			message = "失败";
 			result.put("message", message);
@@ -261,19 +258,23 @@ public class CategoryController {
 		}
 	}
 	/**
-     * 实现/category删除功能
+     * 实现/goods删除功能
      */	
-	@RequestMapping("/deleteCategory")
+	@RequestMapping("/DeleteGoods")
 	@ResponseBody  
-	public Map<String, Object> deleteCategory(Integer id) {
-//		System.out.println(id);
+	public Map<String, Object> DeleteGoods(Integer id) {
+		Map<String, Object> searchGoods = new HashMap<String, Object>();
 		Map<String, Object> result = new HashMap<String, Object>();
 		Map<String, Object> map = new HashMap<String, Object>();
 		int code;
-		String state, message;
+		String state, message;	
 		try{
 			if(id != 0){
-				categoryService.DeleteCategory(id);
+				searchGoods = goodsService.SearchGoods(id);
+				if(searchGoods != null){
+					goodsService.DeleteGoods(id);
+					
+				}
 				message = "成功";
 				result.put("message", message);
             	code=200;
@@ -285,7 +286,6 @@ public class CategoryController {
     			map.put("result", result);
 //    			System.out.println(JSON.toJSONString(map));
         		return map;
-				
 			}else{
 				message = "失败";
 				result.put("message", message);
@@ -314,6 +314,4 @@ public class CategoryController {
     		return map;
 		}
 	}
-	
-	
 }
