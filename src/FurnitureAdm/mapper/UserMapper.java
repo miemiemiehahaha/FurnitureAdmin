@@ -25,7 +25,7 @@ public interface UserMapper {
 	@Select("select * from users where id like #{query} or userName like #{query} or phone like #{query} or addr like #{query} limit #{page},#{pageSize}")
 	List<user> getsearchUserList(user User, @Param("page")Integer page, @Param("pageSize")Integer pageSize, @Param("query")String query);
 
-	@Select("select * from users where id like #{query} or userName like #{query} or phone like #{queryDetail} or addr like #{queryDetail}")
+	@Select("select * from users where id like #{query} or userName like #{query} or phone like #{query} or addr like #{query}")
 	List<user> getsearchAlluser(user User, @Param("query")String query);
 //
 //	//用户名查询
@@ -51,7 +51,7 @@ public interface UserMapper {
 	void updateUser(@Param("id")Integer id, @Param("userName")String userName, @Param("pwd")String pwd, @Param("addr")String addr, @Param("phone")String phone);
 	
 	//用户添加
-	@Insert("insert into users(userName,pwd,addr,phone) values (#{userName},#{pwd},#{addr},#{phone},#{creatDate})")
+	@Insert("insert into users(userName,pwd,addr,phone,creatDate) values (#{userName},#{pwd},#{addr},#{phone},#{creatDate})")
 	void addUser(@Param("userName")String userName, @Param("pwd")String pwd, @Param("addr")String addr, @Param("phone")String phone,@Param("creatDate")String creatDate);
 
 	@Select("select * from users where userName=#{userName}")
