@@ -33,4 +33,6 @@ public interface GoodsService {
 	
 	void DeleteGoods(Integer id);
 
+	//获取产品名
+	Map<String, Object> GetGoodsName(Integer goodsID);
 }

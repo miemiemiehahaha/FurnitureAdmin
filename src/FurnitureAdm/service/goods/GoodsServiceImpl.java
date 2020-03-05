@@ -85,4 +85,10 @@ public class GoodsServiceImpl implements GoodsService {
 		goodsMapper.updategoods(id, goodsName, categoryID, picInfo, inPrice, quantity, detail, size, color, remark);
 	}
 
+	@Override
+	public Map<String, Object> GetGoodsName(Integer goodsID) {
+		// TODO Auto-generated method stub
+		return goodsMapper.getgoodskName(goodsID);
+	}
+
 }
