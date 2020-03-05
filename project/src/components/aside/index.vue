@@ -1,7 +1,13 @@
 <template>
   <div class="aside">
     <ul class="nav">
-      <li class="item" v-for="(item, index) in nav" :key="index" @click="currentRoute(item.id)">
+      <li
+        class="item"
+        v-for="(item, index) in nav"
+        :key="index"
+        @click="currentRoute(item.id)"
+        :class="{ active: currentId === item.id }"
+      >
         <span>{{ item.name }}</span>
       </li>
     </ul>
@@ -10,9 +16,10 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
-      nav :[
+      currentId: 0,
+      nav: [
         {
           name: '用户管理',
           id: 1
@@ -37,7 +44,8 @@ export default {
     }
   },
   methods: {
-    currentRoute (id) {
+    currentRoute(id) {
+      this.currentId = id
       if (id === 1) {
         this.$router.push('/userManage')
       } else if (id === 2) {
@@ -57,7 +65,10 @@ export default {
   cursor: pointer;
   margin: 5px 0;
 }
-.nav .item:hover {
+.nav .active {
   background-color: #ccc;
+}
+.nav .item:hover {
+  background-color: blanchedalmond;
 }
 </style>
