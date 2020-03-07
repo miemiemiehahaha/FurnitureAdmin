@@ -9,8 +9,19 @@ const routes = [
     component: () => import('../components/userManage/index.vue')
   },
   {
-    path: '/adminManage',
-    component: () => import('../components/adminManage/index.vue')
+    path: '/orderManage',
+    component: () => import('../components/orderManage/index.vue')
+  },
+  {
+    path: '/goodscateManage',
+    component: () => import('../components/goodscateManage/index.vue')
+  },
+  {
+    path: '/goodsManage',
+    component: () => import('../components/goodsManage/index.vue')
+  },{
+    path: '/test1',
+    component: () => import('../components/test1/index.vue')
   }
 ]
 

@@ -24,11 +24,11 @@ public class CategoryController {
 	private CategoryService categoryService;
 	
 	/**
-     * ·µ»Ø/categoryµÄ²éÑ¯ÁÐ±í
+     * ï¿½ï¿½ï¿½ï¿½/categoryï¿½Ä²ï¿½Ñ¯ï¿½Ð±ï¿½
      */	
-    @RequestMapping("/getcategroyList")
+    @RequestMapping("/getcategoryList")
     @ResponseBody
-    public Map<String, Object> getCategroyList(Category category, Integer page, Integer pageSize, String query){
+    public Map<String, Object> getCategoryList(Category category, Integer page, Integer pageSize, String query){
 		List<Category> categoryList = new ArrayList<Category>();
 		List<Category> AllCategoryList = new ArrayList<Category>();
 		Map<String, Object> result = new HashMap<String, Object>();
@@ -50,7 +50,7 @@ public class CategoryController {
             	result.put("list", categoryList);
             	code=200;  
     			state="success";
-    			message="³É¹¦";
+    			message="ï¿½É¹ï¿½";
     			map.put("code", code);
     			map.put("state", state);	
     			map.put("message", message);
@@ -63,7 +63,7 @@ public class CategoryController {
             	result.put("list", categoryList);
             	code=0;
     			state="fail";
-    			message="Ê§°Ü";
+    			message="Ê§ï¿½ï¿½";
     			map.put("code", code);
     			map.put("state", state);	
     			map.put("message", message);
@@ -78,7 +78,7 @@ public class CategoryController {
         	result.put("list", categoryList);
         	code=0;
 			state="fail";
-			message="Ê§°Ü";
+			message="Ê§ï¿½ï¿½";
 			map.put("code", code);
 			map.put("state", state);	
 			map.put("message", message);
@@ -89,7 +89,7 @@ public class CategoryController {
     }
     
     /**
-     * ·µ»Ø/categoryÄÃµ½ÏêÇé
+     * ï¿½ï¿½ï¿½ï¿½/categoryï¿½Ãµï¿½ï¿½ï¿½ï¿½ï¿½
      */	
     @RequestMapping("/getCategoryDetail")
 	@ResponseBody  
@@ -103,7 +103,7 @@ public class CategoryController {
 				categoryDetail = categoryService.CategoryDetail(category, id);
 				code=200;
     			state="success";
-    			message="³É¹¦";
+    			message="ï¿½É¹ï¿½";
     			map.put("code", code);
     			map.put("state", state);	
     			map.put("message", message);
@@ -113,7 +113,7 @@ public class CategoryController {
 			}else{
 				code=0;
     			state="fail";
-    			message="Ê§°Ü";
+    			message="Ê§ï¿½ï¿½";
     			map.put("code", code);
     			map.put("state", state);	
     			map.put("message", message);
@@ -125,7 +125,7 @@ public class CategoryController {
 			System.out.println(e);
         	code=0;
 			state="fail";
-			message="Ê§°Ü";
+			message="Ê§ï¿½ï¿½";
 			map.put("code", code);
 			map.put("state", state);	
 			map.put("message", message);
@@ -137,23 +137,24 @@ public class CategoryController {
     }
     
 	/**
-     * ÊµÏÖ/categoryÐÞ¸Ä
+     * Êµï¿½ï¿½/categoryï¿½Þ¸ï¿½
      */	
     @RequestMapping("/categoryUpdate")
 	@ResponseBody  
 	public Map<String, Object> updateCategory(Integer id, String categoryName, String remark) {
-		Map<String, Object> result = new HashMap<String, Object>();
+		System.out.println(id + "," + categoryName +","+remark);
+    	Map<String, Object> result = new HashMap<String, Object>();
 		Map<String, Object> map = new HashMap<String, Object>();
 		int code;
 		String state, message;	
 		try{
 			if(id != 0){
 				categoryService.UpdateCategory(id, categoryName, remark);
-				message = "³É¹¦";
+				message = "ï¿½É¹ï¿½";
 				result.put("message", message);
             	code=200;
     			state="success";
-    			message="³É¹¦";
+    			message="ï¿½É¹ï¿½";
     			map.put("code", code);
     			map.put("state", state);	
     			map.put("message", message);
@@ -161,11 +162,11 @@ public class CategoryController {
 //    			System.out.println(JSON.toJSONString(map));
         		return map;
 			}else{
-				message = "Ê§°Ü";
+				message = "Ê§ï¿½ï¿½";
 				result.put("message", message);
             	code=0;
     			state="fail";
-    			message="Ê§°Ü";
+    			message="Ê§ï¿½ï¿½";
     			map.put("code", code);
     			map.put("state", state);	
     			map.put("message", message);
@@ -175,11 +176,11 @@ public class CategoryController {
 			}
 		}catch(Exception e){
 			System.out.println(e);
-			message = "Ê§°Ü";
+			message = "Ê§ï¿½ï¿½";
 			result.put("message", message);
         	code=0;
 			state="fail";
-			message="Ê§°Ü";
+			message="Ê§ï¿½ï¿½";
 			map.put("code", code);
 			map.put("state", state);	
 			map.put("message", message);
@@ -190,7 +191,7 @@ public class CategoryController {
     }
     
 	/**
-     * ÊµÏÖ/categoryÌí¼Ó¹¦ÄÜ
+     * Êµï¿½ï¿½/categoryï¿½ï¿½Ó¹ï¿½ï¿½ï¿½
      */	
 	@RequestMapping("/addCategory")
 	@ResponseBody  
@@ -207,11 +208,11 @@ public class CategoryController {
 				searchCategoryName = categoryService.SearchCategoryName(categoryName);
 				if(searchCategoryName == null){
 					categoryService.AddCategory(categoryName, remark);
-					message = "³É¹¦";
+					message = "ï¿½É¹ï¿½";
 					result.put("message", message);
 	            	code=200;
 	    			state="success";
-	    			message="³É¹¦";
+	    			message="ï¿½É¹ï¿½";
 	    			map.put("code", code);
 	    			map.put("state", state);	
 	    			map.put("message", message);
@@ -219,12 +220,12 @@ public class CategoryController {
 //	    			System.out.println(JSON.toJSONString(map));
 	        		return map;
 				}else{
-					message = "´ËÍ¼ÊéÀà±ðÒÑ´æÔÚ£¡";
+					message = "ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½ï¿½Ú£ï¿½";
 //					result.put("flag", flag);
 					result.put("message", message);
 	            	code=200;
 	    			state="fail";
-	    			message="Ê§°Ü";
+	    			message="Ê§ï¿½ï¿½";
 	    			map.put("code", code);
 	    			map.put("state", state);	
 	    			map.put("message", message);
@@ -233,11 +234,11 @@ public class CategoryController {
 	        		return map;
 				}
 			}else{
-				message = "Ê§°Ü";
+				message = "Ê§ï¿½ï¿½";
 				result.put("message", message);
             	code=0;
     			state="fail";
-    			message="Ê§°Ü";
+    			message="Ê§ï¿½ï¿½";
     			map.put("code", code);
     			map.put("state", state);	
     			map.put("message", message);
@@ -247,11 +248,11 @@ public class CategoryController {
 			}
 		}catch(Exception e ){
 			System.out.println(e);
-			message = "Ê§°Ü";
+			message = "Ê§ï¿½ï¿½";
 			result.put("message", message);
         	code=0;
 			state="fail";
-			message="Ê§°Ü";
+			message="Ê§ï¿½ï¿½";
 			map.put("code", code);
 			map.put("state", state);	
 			map.put("message", message);
@@ -261,7 +262,7 @@ public class CategoryController {
 		}
 	}
 	/**
-     * ÊµÏÖ/categoryÉ¾³ý¹¦ÄÜ
+     * Êµï¿½ï¿½/categoryÉ¾ï¿½ï¿½ï¿½ï¿½
      */	
 	@RequestMapping("/deleteCategory")
 	@ResponseBody  
@@ -274,11 +275,11 @@ public class CategoryController {
 		try{
 			if(id != 0){
 				categoryService.DeleteCategory(id);
-				message = "³É¹¦";
+				message = "ï¿½É¹ï¿½";
 				result.put("message", message);
             	code=200;
     			state="success";
-    			message="³É¹¦";
+    			message="ï¿½É¹ï¿½";
     			map.put("code", code);
     			map.put("state", state);	
     			map.put("message", message);
@@ -287,11 +288,11 @@ public class CategoryController {
         		return map;
 				
 			}else{
-				message = "Ê§°Ü";
+				message = "Ê§ï¿½ï¿½";
 				result.put("message", message);
             	code=0;
     			state="fail";
-    			message="Ê§°Ü";
+    			message="Ê§ï¿½ï¿½";
     			map.put("code", code);
     			map.put("state", state);	
     			map.put("message", message);
@@ -301,11 +302,11 @@ public class CategoryController {
 			}
 		}catch(Exception e){
 			System.out.println(e);
-			message = "Ê§°Ü";
+			message = "Ê§ï¿½ï¿½";
 			result.put("message", message);
         	code=0;
 			state="fail";
-			message="Ê§°Ü";
+			message="Ê§ï¿½ï¿½";
 			map.put("code", code);
 			map.put("state", state);	
 			map.put("message", message);

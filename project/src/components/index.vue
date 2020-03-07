@@ -14,7 +14,7 @@
               <router-view />
             </div>
           </el-main>
-          <el-footer>Footer</el-footer>
+          <el-footer>Designed By Yannes & Yan</el-footer>
         </el-container>
       </el-container>
     </el-container>
@@ -32,7 +32,7 @@ export default {
 
 <style>
 .content-wrap {
-  padding: 20px;
+  padding: 15px;
   background-color: blanchedalmond;
 }
 .topHeader {

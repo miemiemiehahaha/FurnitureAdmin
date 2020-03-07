@@ -1,16 +1,15 @@
 <template>
-  <div class="userManage">
+  <div class="goodscateManage">
     <el-button class="addNew" icon="el-icon-plus" @click="addNew"
-      >新增用户</el-button
+      >新增产品类别</el-button
     >
     <el-table
-      :data="userList"
+      :data="categoryList"
       style="width: 100%"
       :highlight-current-row="true"
     >
-      <el-table-column label="用户名" prop="userName" />
-      <el-table-column label="收货地址" prop="addr" />
-      <el-table-column label="手机号" prop="phone" />
+      <el-table-column label="ID" prop="id" />
+      <el-table-column label="类别名" prop="categoryName" />
       <el-table-column align="right">
         <template slot="header" slot-scope="scope">
           <div class="searchWrapper">
@@ -18,7 +17,7 @@
               v-model="search"
               size="mini"
               placeholder="输入关键字搜索：enter"
-              @keyup.enter.native="fetchUserList"
+              @keyup.enter.native="fetchcategoryList"
             />
             <el-button size="mini" @click="reset" type="success">重置</el-button>
           </div>
@@ -28,7 +27,7 @@
           <el-button
             size="mini"
             type="danger"
-            @click="handleDelete(scope.row.id, scope.row.userName)"
+            @click="handleDelete(scope.row.id, scope.row.categoryName)"
             >删除</el-button
           >
         </template>
@@ -50,31 +49,18 @@
       :direction="'rtl'"
     >
       <div class="form-body">
-        <span class="title">{{ isAdd ? '添加用户' : '编辑用户' }}</span>
-        <el-form class="formDetail" :model="userInfoDetail">
-          <el-form-item label="用户名:" :label-width="'80px'" >
+        <span class="title">{{ isAdd ? '添加类别' : '编辑类别' }}</span>
+        <el-form class="formDetail" :model="cateInfoDetail">
+          <el-form-item label="ID:" :label-width="'80px'"  v-if="!isAdd" >
             <el-input
-              v-model="userInfoDetail.userName"
+              v-model="cateInfoDetail.id"
               :disabled="!isAdd"
               autocomplete="off"
             ></el-input>
           </el-form-item>
-          <el-form-item label="密码:" :label-width="'80px'" v-if="isAdd">
+          <el-form-item label="类别名:" :label-width="'80px'">
             <el-input
-              v-model="userInfoDetail.pwd"
-              autocomplete="off"
-              show-password
-            ></el-input>
-          </el-form-item>
-          <el-form-item label="收货地址:" :label-width="'80px'">
-            <el-input
-              v-model="userInfoDetail.addr"
-              autocomplete="off"
-            ></el-input>
-          </el-form-item>
-          <el-form-item label="手机号:" :label-width="'80px'">
-            <el-input
-              v-model="userInfoDetail.phone"
+              v-model="cateInfoDetail.categoryName"
               autocomplete="off"
             ></el-input>
           </el-form-item>
@@ -98,25 +84,25 @@ export default {
         pageNum: 1,
         pageSize: 6
       },
-      userList: [],
+      categoryList: [],
       drawerShow: false,
-      userInfoDetail: {},
+      cateInfoDetail: {},
       isAdd: null
     }
   },
   created() {
-    this.fetchUserList()
+    this.fetchcategoryList()
   },
   methods: {
-    handleDelete(id, username) {
-      this.$confirm(`此操作将会永久删除用户(${username}), 是否继续?`, '提示', {
+    handleDelete(id, categoryname) {
+      this.$confirm(`此操作将会永久删除类别(${categoryname}), 是否继续?`, '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning',
         center: true
       })
         .then(() => {
-          this.deleteUser(id)
+          this.deletecate(id)
         })
         .catch(() => {
           this.$message({
@@ -127,43 +113,38 @@ export default {
     },
     handleEdit(userInfo) {
       this.isAdd = false
-      this.userInfoDetail = userInfo
+      this.cateInfoDetail = userInfo
       this.drawerShow = true
     },
     reset() {
       this.search = ''
-      this.fetchUserList()
+      this.fetchcategoryList()
     },
     handleCurrentChange() {
-      this.fetchUserList()
+      this.fetchcategoryList()
     },
     addNew() {
-      this.userInfoDetail = {
-        userName: '',
-        addr: '',
-        pwd: '',
-        phone: ''
+      this.cateInfoDetail = {
+        id: '',
+        categoryName: ''
       }
       this.isAdd = true
       this.drawerShow = true
     },
     addOrUpdate() {
       const url = this.isAdd
-        ? '/FurnitureAdm/addUser'
-        : '/FurnitureAdm/userUpdate'
+        ? '/FurnitureAdm/addCategory'
+        : '/FurnitureAdm/categoryUpdate'
       this.$axios({
         url,
         method: 'POST',
         data: this.$qs.stringify({
-          userId: this.userInfoDetail.id || '',
-          userName: this.userInfoDetail.userName,
-          pwd: this.userInfoDetail.pwd,
-          addr: this.userInfoDetail.addr,
-          phone: this.userInfoDetail.phone
+          id: this.cateInfoDetail.id || '',
+          categoryName: this.cateInfoDetail.categoryName
         })
       }).then(({ data }) => {
         if (data.code === 200) {
-          this.fetchUserList()
+          this.fetchcategoryList()
           this.$message({
             type: 'success',
             message: this.isAdd ? '添加成功!' : '修改成功!'
@@ -171,7 +152,7 @@ export default {
         } else {
           let message = this.isAdd ? '添加失败!' : '修改失败!'
           if (data.result.isExist) {
-            message = '用户已存在，添加失败!'
+            message = '类别已存在，添加失败!'
           }
           this.$message({
             type: 'error',
@@ -181,17 +162,17 @@ export default {
         this.drawerShow = false
       })
     },
-    deleteUser(id) {
+    deletecate(id) {
       this.$axios({
         method: 'POST',
-        url: '/FurnitureAdm/Deleteuser',
+        url: '/FurnitureAdm/deleteCategory',
         data: this.$qs.stringify({
           id
         })
       }).then(({ data }) => {
         const { code } = data
         if (code === 200) {
-          this.fetchUserList()
+          this.fetchcategoryList()
           this.$message({
             type: 'success',
             message: '删除成功!'
@@ -199,10 +180,10 @@ export default {
         }
       })
     },
-    fetchUserList() {
+    fetchcategoryList() {
       this.$axios({
         method: 'POST',
-        url: '/FurnitureAdm/getuserList',
+        url: '/FurnitureAdm/getcategoryList',
         data: this.$qs.stringify({
           page: this.page.pageNum,
           pageSize: this.page.pageSize,
@@ -211,7 +192,7 @@ export default {
       }).then(({ data }) => {
         const { code, result } = data
         if (code === 200) {
-          this.userList = result.list
+          this.categoryList = result.list
           this.total = result.total
         }
       })

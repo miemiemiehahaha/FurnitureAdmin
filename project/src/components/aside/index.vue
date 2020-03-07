@@ -25,20 +25,19 @@ export default {
           id: 1
         },
         {
-          name: '管理员管理',
+          name: '订单管理',
           id: 2
         },
         {
-          name: '订单管理',
+          name: '产品类别管理',
           id: 3
         },
         {
-          name: '产品类别管理',
-          id: 4
-        },
-        {
           name: '产品管理',
-          id: 5
+          id:4
+        },{
+          name: '测试',
+          id:5
         }
       ]
     }
@@ -49,7 +48,13 @@ export default {
       if (id === 1) {
         this.$router.push('/userManage')
       } else if (id === 2) {
-        this.$router.push('/adminManage')
+        this.$router.push('/orderManage')
+      }else if (id === 3) {
+        this.$router.push('/goodscateManage')
+      }else if (id === 4) {
+        this.$router.push('/goodsManage')
+      }else if (id === 5) {
+        this.$router.push('/test1')
       }
     }
   }
