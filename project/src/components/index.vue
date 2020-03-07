@@ -3,6 +3,7 @@
     <el-container>
       <el-header class="topHeader">
         宅家家居后台管理系统
+        <login-status :isLogin="isLogin" :id="adminId" @logout="logout"/>
       </el-header>
       <el-container>
         <el-aside class="asideNav" width="200px">
@@ -11,7 +12,7 @@
         <el-container style="margin: 40px 0 0 200px">
           <el-main>
             <div class="content-wrap">
-              <router-view />
+              <router-view @login="login"/>
             </div>
           </el-main>
           <el-footer>Designed By Yannes & Yan</el-footer>
@@ -23,9 +24,27 @@
 
 <script>
 import Aside from './aside'
+import LoginStatus from './adminLogin/components/LoginStatus'
 export default {
   components: {
-    Aside
+    Aside,
+    LoginStatus
+  },
+  data () {
+    return {
+      isLogin: null,
+      adminId: 0
+    }
+  },
+  methods: {
+    login (id) {
+      this.isLogin = true
+      this.adminId = id
+    },
+    logout () {
+      this.isLogin = false
+      this.adminId = 0
+    }
   }
 }
 </script>
