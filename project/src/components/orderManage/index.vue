@@ -10,21 +10,39 @@
       />
       <el-button size="mini" @click="reset" type="success">重置</el-button>
     </div>
-    <el-table :data="orderList" style="width: 100%" :highlight-current-row="true">
+    <el-table
+      :data="orderList"
+      style="width: 100%"
+      :highlight-current-row="true"
+    >
       <el-table-column label="用户名" prop="userName" />
       <el-table-column label="订单号" prop="orderCode" />
       <el-table-column label="商品数目" prop="totalNum" />
       <el-table-column label="订单总价" prop="totalMoney" />
       <el-table-column label="创建日期" prop="orderDate" />
       <el-table-column align="right">
-        <el-popover placement="right" width="400" trigger="click">
-          <el-table :data="orderdetailList">
-            <el-table-column width="150" property="goodsName" label="产品名" />
-            <el-table-column width="100" property="num" label="数量" />
-            <el-table-column width="300" property="price" label="单价" />
-          </el-table>
-          <el-button slot="reference">详情</el-button>
-        </el-popover>
+        <template slot-scope="scope">
+          <el-popover placement="right" trigger="click">
+            <el-table :data="orderDetailList">
+              <el-table-column
+                width="150"
+                property="goodsName"
+                label="产品名"
+              />
+              <el-table-column width="100" property="num" label="数量" />
+              <el-table-column width="100" property="price" label="单价(￥)" />
+              <el-table-column width="100" label="总价(￥)">
+                <template slot-scope="props">
+                  <span> {{ (Number(props.row.price) * props.row.num).toFixed(2) }} </span>
+                </template>
+              </el-table-column>
+
+            </el-table>
+            <el-button slot="reference" @click="getOrderDetail(scope.row.id)"
+              >详情</el-button
+            >
+          </el-popover>
+        </template>
       </el-table-column>
     </el-table>
     <div class="myPagination">
@@ -43,46 +61,64 @@
 export default {
   data() {
     return {
-      search: "",
+      search: '',
       total: 0,
       page: {
         pageNum: 1,
         pageSize: 6
       },
-      orderList: []
-    };
+      orderList: [],
+      orderDetailList: []
+    }
   },
   created() {
-    this.fetchOrderList();
+    this.fetchOrderList()
   },
   methods: {
+    getOrderDetail(id) {
+      this.$axios({
+        method: 'POST',
+        url: '/FurnitureAdm/getOrderDetail',
+        data: this.$qs.stringify({ id })
+      }).then(({ data }) => {
+        const { code, result } = data
+        if (code === 200) {
+          this.orderDetailList = result.orderItemList
+        } else {
+          this.$notify({
+            title: '错误',
+            message: '暂无数据'
+          })
+        }
+      })
+    },
     reset() {
-      this.search = "";
-      this.fetchOrderList();
+      this.search = ''
+      this.fetchOrderList()
     },
     handleCurrentChange() {
-      this.fetchOrderList();
+      this.fetchOrderList()
     },
 
     fetchOrderList() {
       this.$axios({
-        method: "POST",
-        url: "/FurnitureAdm/getOrderList",
+        method: 'POST',
+        url: '/FurnitureAdm/getOrderList',
         data: this.$qs.stringify({
           page: this.page.pageNum,
           pageSize: this.page.pageSize,
           query: this.search
         })
       }).then(({ data }) => {
-        const { code, result } = data;
+        const { code, result } = data
         if (code === 200) {
-          this.orderList = result.list;
-          this.total = result.total;
+          this.orderList = result.list
+          this.total = result.total
         }
-      });
+      })
     }
   }
-};
+}
 </script>
 
 <style>

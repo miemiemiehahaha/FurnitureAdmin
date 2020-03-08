@@ -12,7 +12,7 @@
       <el-table-column label="收货地址" prop="addr" />
       <el-table-column label="手机号" prop="phone" />
       <el-table-column align="right">
-        <template slot="header" slot-scope="scope">
+        <template slot="header">
           <div class="searchWrapper">
             <el-input
               v-model="search"
@@ -70,6 +70,7 @@
             <el-input
               v-model="userInfoDetail.addr"
               autocomplete="off"
+              type="textarea"
             ></el-input>
           </el-form-item>
           <el-form-item label="手机号:" :label-width="'80px'">
@@ -245,6 +246,9 @@ export default {
   text-align: left;
 }
 .form-body .el-input {
+  width: 95% !important;
+}
+.form-body .el-textarea {
   width: 95% !important;
 }
 .form-body .formDetail {

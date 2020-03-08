@@ -12,12 +12,42 @@
       <el-button class="addNew1" icon="el-icon-plus" @click="addNew">新增产品</el-button>
     </div>
     <el-table :data="goodsList" style="width: 100%" :highlight-current-row="true">
-      <el-table-column label="ID" prop="id" />
+      <el-table-column type="expand">
+      <template slot-scope="props">
+        <el-form label-position="left" inline class="table-expand">
+          <el-form-item label="商品ID：">
+            <span>{{ props.row.id }}</span>
+          </el-form-item>
+          <el-form-item label="商品名称：">
+            <span>{{ props.row.goodsName }}</span>
+          </el-form-item>
+          <el-form-item label="商品单价：">
+            <span>￥{{ props.row.inPrice }}</span>
+          </el-form-item>
+          <el-form-item label="商品图片：">
+            <img :src="props.row.picInfo" alt="">
+          </el-form-item>
+          <el-form-item label="商品库存：">
+            <span>{{ props.row.quantity }}</span>
+          </el-form-item>
+          <el-form-item label="商品规格：">
+            <span>{{ props.row.size }}</span>
+          </el-form-item>
+          <el-form-item label="商品性质：">
+            <span>{{ props.row.color }}</span>
+          </el-form-item>
+          <el-form-item label="商品描述：">
+            <span>{{ props.row.detail }}</span>
+          </el-form-item>
+        </el-form>
+      </template>
+    </el-table-column>
+      <el-table-column label="ID" prop="id" width="60px"/>
       <el-table-column label="品牌名" prop="goodsName" />
       <el-table-column label="性质" prop="color" />
-      <el-table-column label="价格" prop="inPrice" />
-      <el-table-column label="库存" prop="quantity" />
-      <el-table-column align="right">
+      <el-table-column label="价格(￥)" prop="inPrice" width="100px"/>
+      <el-table-column label="库存" prop="quantity" width="100px" />
+      <el-table-column align="right" width="200px">
         <template slot-scope="scope">
           <el-button size="mini" @click="handleEdit(scope.row)">编辑</el-button>
           <el-button
@@ -60,7 +90,7 @@
             <el-input v-model="goodsInfoDetail.inPrice" autocomplete="off"></el-input>
           </el-form-item>
           <el-form-item label="描述:" :label-width="'80px'">
-            <el-input v-model="goodsInfoDetail.detail" autocomplete="off"></el-input>
+            <el-input type="textarea" v-model="goodsInfoDetail.detail" autocomplete="off"></el-input>
           </el-form-item>
           <el-form-item label="图片:" :label-width="'80px'">
             <el-input v-model="goodsInfoDetail.picInfo" autocomplete="off"></el-input>
@@ -204,7 +234,7 @@ export default {
       }).then(({ data }) => {
         const { code, result } = data;
         if (code === 200) {
-          this.goodsList = result.list;
+          this.goodsList = result.goodsList;
           this.total = result.total;
         }
       });
@@ -246,4 +276,17 @@ export default {
 .form-body .formBtn {
   padding-bottom: 20px;
 }
+.table-expand {
+  display: flex;
+  flex-direction: column;
+}
+.table-expand .el-form-item {
+  margin: 0;
+  padding: 4px;
+  border-bottom: 1px solid #ccc;
+}
+.table-expand .el-form-item  .el-form-item__label {
+  color: #000;
+}
+
 </style>

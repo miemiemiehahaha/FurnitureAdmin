@@ -1,79 +1,56 @@
 <template>
   <div class="aside">
     <ul class="nav">
-      <li
-        class="item"
-        v-for="(item, index) in nav"
-        :key="index"
-        @click="currentRoute(item.id)"
-        :class="{ active: currentId === item.id }"
+      <router-link class="item" tag="li" to="/userManage">用户管理</router-link>
+      <router-link class="item" tag="li" to="/orderManage"
+        >订单管理</router-link
       >
-        <span>{{ item.name }}</span>
-      </li>
+      <router-link class="item" tag="li" to="/goodscateManage"
+        >产品类别管理</router-link
+      >
+      <router-link class="item" tag="li" to="/goodsManage"
+        >产品管理</router-link
+      >
     </ul>
   </div>
 </template>
 
 <script>
-export default {
-  data() {
-    return {
-      currentId: 0,
-      nav: [
-        {
-          name: '用户管理',
-          id: 1
-        },
-        {
-          name: '订单管理',
-          id: 2
-        },
-        {
-          name: '产品类别管理',
-          id: 3
-        },
-        {
-          name: '产品管理',
-          id:4
-        },{
-          name: '测试',
-          id:5
-        }
-      ]
-    }
-  },
-  methods: {
-    currentRoute(id) {
-      this.currentId = id
-      if (id === 1) {
-        this.$router.push('/userManage')
-      } else if (id === 2) {
-        this.$router.push('/orderManage')
-      }else if (id === 3) {
-        this.$router.push('/goodscateManage')
-      }else if (id === 4) {
-        this.$router.push('/goodsManage')
-      }else if (id === 5) {
-        this.$router.push('/test1')
-      }
-    }
-  }
-}
+export default {}
 </script>
 
 <style>
+.nav {
+  height: 100%;
+}
 .nav .item {
   widows: 100%;
   height: 50px;
   text-align: center;
   line-height: 50px;
   cursor: pointer;
-  margin: 5px 0;
+  margin: 20px 0;
+  position: relative;
+  cursor: pointer;
 }
-.nav .active {
-  background-color: #ccc;
+.nav .item::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50px;
+  bottom: -5px;
+  right: 0;
+  border-radius: 20px;
+  transition: 0.3s;
+  opacity: 0.7;
+  background-color: rgba(54, 119, 255, 0.5);
+  transform-origin: left;
+  transform: scaleX(0);
 }
-.nav .item:hover {
+.nav .item:hover::after {
+  transform: scaleX(1);
+}
+.nav .router-link-active {
   background-color: blanchedalmond;
 }
 </style>
