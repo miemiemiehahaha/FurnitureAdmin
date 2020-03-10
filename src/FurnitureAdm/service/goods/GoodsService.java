@@ -21,10 +21,10 @@ public interface GoodsService {
 	Map<String,Object> GoodsDetail(goods Goods,Integer id);
 	
 	//产品修改
-	void UpdateGoods(Integer id,String goodsName,String categoryID,String picInfo,String inPrice,String quantity,String detail ,String size,String color,String remark);
+	void UpdateGoods(Integer id,String goodsName,String categoryID,String picInfo,String inPrice,String quantity,String detail ,String goodsize,String color,String remark);
 		
 	//产品添加
-	void AddGoods(String goodsName,String categoryID,String picInfo,String inPrice,String quantity,String detail ,String size,String color,String remark);
+	void AddGoods(String goodsName,String categoryID,String picInfo,String inPrice,String quantity,String detail ,String goodsize,String color,String remark);
 	
 	Map<String, Object> SearchGoodwithname(String goodsName);
 	

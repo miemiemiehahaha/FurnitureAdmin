@@ -53,10 +53,10 @@ public class GoodsServiceImpl implements GoodsService {
 
 	@Override
 	public void AddGoods(String goodsName, String categoryID, String picInfo,
-			String inPrice, String quantity, String detail, String size,
+			String inPrice, String quantity, String detail, String goodsize,
 			String color, String remark) {
 		// TODO Auto-generated method stub
-		goodsMapper.addGoods(goodsName, categoryID, picInfo, inPrice, quantity, detail, size, color, remark);
+		goodsMapper.addGoods(goodsName, categoryID, picInfo, inPrice, quantity, detail, goodsize, color, remark);
 	}
 
 	@Override
@@ -80,9 +80,9 @@ public class GoodsServiceImpl implements GoodsService {
 	@Override
 	public void UpdateGoods(Integer id, String goodsName, String categoryID,
 			String picInfo, String inPrice, String quantity, String detail,
-			String size, String color, String remark) {
+			String goodsize,String color, String remark) {
 		// TODO Auto-generated method stub
-		goodsMapper.updategoods(id, goodsName, categoryID, picInfo, inPrice, quantity, detail, size, color, remark);
+		goodsMapper.updategoods(id, goodsName, categoryID, picInfo, inPrice, quantity, detail, goodsize,color, remark);
 	}
 
 	@Override

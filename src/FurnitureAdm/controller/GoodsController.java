@@ -156,14 +156,17 @@ public class GoodsController {
      */	
 	@RequestMapping("/updateGoods")
 	@ResponseBody  
-	public Map<String, Object> updateGoods(Integer id, String goodsName, String categoryID, String picInfo, String inPrice, String quantity,  String detail, String size, String color, String remark) {
+	public Map<String, Object> updateGoods(Integer goodsid, String goodsName, String categoryID, String picInfo, String inPrice, String quantity,  String detail, String goodsize, String color, String remark) {
+//		System.out.println(goodsid+","+goodsName+","+categoryID+","+picInfo+","+inPrice+","+quantity+","+detail+","+size+","+color);
 		Map<String, Object> result = new HashMap<String, Object>();
 		Map<String, Object> map = new HashMap<String, Object>();
 		int code;
 		String state, message;	
 		try{
-			if(id != 0){
-				goodsService.UpdateGoods(id, goodsName, categoryID, picInfo, inPrice, quantity, detail, size, color, remark);
+			if(goodsid != 0){
+				Integer id = goodsid;
+//				System.out.println(getType(id));
+				goodsService.UpdateGoods(id, goodsName, categoryID, picInfo, inPrice, quantity, detail, goodsize,color, remark);
 				message = "成功";
 				result.put("message", message);
             	code=200;
@@ -203,12 +206,14 @@ public class GoodsController {
     		return map;
 		}
 	}
+
 	/**
      * 实现/goods添加功能
      */	
 	@RequestMapping("/AddGoods")
 	@ResponseBody  
-	public Map<String, Object> AddGoods(String goodsName, String categoryID, String picInfo,String inPrice, String quantity,  String detail, String size, String color, String remark) {
+	public Map<String, Object> AddGoods(String goodsName, String categoryID, String picInfo,String inPrice, String quantity,  String detail, String goodsize, String color, String remark) {
+//		System.out.println(getType(goodsize));
 		Map<String, Object> result = new HashMap<String, Object>();
 		Map<String, Object> map = new HashMap<String, Object>();
 		int code;
@@ -216,7 +221,7 @@ public class GoodsController {
 		try{
 			if(goodsName != null){
 
-				goodsService.AddGoods(goodsName, categoryID, picInfo, inPrice, quantity, detail, size, color, remark);
+				goodsService.AddGoods(goodsName, categoryID, picInfo, inPrice, quantity, detail, goodsize, color, remark);
 				message = "成功";
 				result.put("message", message);
 	            code=200;

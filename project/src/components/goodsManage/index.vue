@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div class="goodsManage">
     <div class="searchWrapper">
       <el-input
@@ -158,7 +158,7 @@ export default {
       this.goodsInfoDetail = {
         goodsName: "",
         color: "",
-        size: "",
+        size:"",
         quantity: "",
         inPrice: "",
         detail: "",
@@ -175,10 +175,10 @@ export default {
         url,
         method: "POST",
         data: this.$qs.stringify({
-          id: this.goodsInfoDetail.id || "",
+          goodsid: this.goodsInfoDetail.id || "",
           goodsName: this.goodsInfoDetail.goodsName,
           color: this.goodsInfoDetail.color,
-          size: this.goodsInfoDetail.size,
+          goodsize: this.goodsInfoDetail.size,
           quantity: this.goodsInfoDetail.quantity,
           inPrice: this.goodsInfoDetail.inPrice,
           detail: this.goodsInfoDetail.detail,
