@@ -12,7 +12,7 @@
       <el-table-column label="收货地址" prop="addr" />
       <el-table-column label="手机号" prop="phone" />
       <el-table-column align="right">
-        <template slot="header">
+        <template slot="header" slot-scope="scope">
           <div class="searchWrapper">
             <el-input
               v-model="search"

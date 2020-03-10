@@ -7,8 +7,8 @@
       <p class="title">管理员登录</p>
     </div>
     <div class="content">
-      <el-input v-model="username" placeholder="用户名"></el-input>
-      <el-input show-password v-model="password" placeholder="密码"></el-input>
+      <el-input v-model="username" placeholder="用户名" @keyup.enter.native="loginWait"></el-input>
+      <el-input show-password v-model="password" placeholder="密码" @keyup.enter.native="loginWait"></el-input>
       <el-button type="primary" size="medium" @click="loginWait"
         >登 陆</el-button
       >
