@@ -5,7 +5,7 @@
         宅家家居后台管理系统
         <login-status :isLogin="isLogin" :id="adminId" @logout="logout"/>
       </el-header>
-      <el-container>
+      <el-container class="content">
         <el-aside class="asideNav" width="200px">
           <Aside />
         </el-aside>
@@ -52,18 +52,22 @@ export default {
 <style>
 .content-wrap {
   padding: 15px;
-  background-color: blanchedalmond;
+  background-color: #e6eceb;
+}
+.content{
+  min-height: 250px;
 }
 .topHeader {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  background-color: powderblue;
+  background-color: #7a8698;
   z-index: 996;
   height: 60px;
   line-height: 60px;
   font-size: 20px;
+  color:white;
 }
 .asideNav {
   width: 200px;
@@ -72,4 +76,5 @@ export default {
   top: 100px;
   z-index: 999;
 }
+
 </style>

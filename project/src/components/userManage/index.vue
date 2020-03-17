@@ -1,8 +1,16 @@
 <template>
   <div class="userManage">
-    <el-button class="addNew" icon="el-icon-plus" @click="addNew"
-      >新增用户</el-button
-    >
+    <div class="searchWrapper">
+            <el-input
+              class="order_search"
+              v-model="search"
+              size="mini"
+              placeholder="输入关键字搜索：enter"
+              @keyup.enter.native="fetchUserList"
+            />
+            <el-button size="mini" @click="reset" type="success">重置</el-button>     
+            <el-button class="addNew1" icon="el-icon-plus" @click="addNew">新增用户</el-button>
+    </div>
     <el-table
       :data="userList"
       style="width: 100%"
@@ -12,17 +20,6 @@
       <el-table-column label="收货地址" prop="addr" />
       <el-table-column label="手机号" prop="phone" />
       <el-table-column align="right">
-        <template slot="header">
-          <div class="searchWrapper">
-            <el-input
-              v-model="search"
-              size="mini"
-              placeholder="输入关键字搜索：enter"
-              @keyup.enter.native="fetchUserList"
-            />
-            <el-button size="mini" @click="reset" type="success">重置</el-button>
-          </div>
-        </template>
         <template slot-scope="scope">
           <el-button size="mini" @click="handleEdit(scope.row)">编辑</el-button>
           <el-button

@@ -9,7 +9,7 @@
     <div class="content">
       <el-input v-model="username" placeholder="用户名"></el-input>
       <el-input show-password v-model="password" placeholder="密码"></el-input>
-      <el-button type="primary" size="medium" @click="loginWait"
+      <el-button class="btn" type="primary" size="medium" @click="loginWait"
         >登 陆</el-button
       >
     </div>
@@ -102,5 +102,15 @@ export default {
 }
 .login .content .el-button {
   width: 100%;
+}
+.btn {
+    color: #FFF;
+    background-color: #7a8698;
+    border-color: #7a8698;
+}
+.btn:hover {
+    color: #FFF;
+    background-color: #808080;
+    border-color: #7a8698;
 }
 </style>

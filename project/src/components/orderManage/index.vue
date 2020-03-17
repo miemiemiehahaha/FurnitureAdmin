@@ -3,6 +3,7 @@
     <div class="searchWrapper">
       <el-input
         class="order_search"
+        id="same"
         v-model="search"
         size="mini"
         placeholder="输入关键字搜索：enter"
@@ -157,5 +158,9 @@ export default {
 }
 .form-body .formBtn {
   padding-bottom: 20px;
+}
+#same{
+  margin-top: 6px;
+  margin-bottom: 6px;
 }
 </style>

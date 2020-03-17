@@ -43,7 +43,7 @@ export default {}
   border-radius: 20px;
   transition: 0.3s;
   opacity: 0.7;
-  background-color: rgba(54, 119, 255, 0.5);
+  background-color: #7a8698;
   transform-origin: left;
   transform: scaleX(0);
 }
@@ -51,6 +51,6 @@ export default {}
   transform: scaleX(1);
 }
 .nav .router-link-active {
-  background-color: blanchedalmond;
+  background-color: #e6eceb;
 }
 </style>

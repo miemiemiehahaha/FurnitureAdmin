@@ -1,8 +1,16 @@
 <template>
   <div class="goodscateManage">
-    <el-button class="addNew" icon="el-icon-plus" @click="addNew"
-      >新增产品类别</el-button
-    >
+    <div class="searchWrapper">
+            <el-input
+              class="order_search"
+              v-model="search"
+              size="mini"
+              placeholder="输入关键字搜索：enter"
+              @keyup.enter.native="fetchcategoryList"
+            />
+            <el-button size="mini" @click="reset" type="success">重置</el-button>
+            <el-button class="addNew1" icon="el-icon-plus" @click="addNew">新增产品类别</el-button>
+    </div>
     <el-table
       :data="categoryList"
       style="width: 100%"
@@ -11,17 +19,6 @@
       <el-table-column label="ID" prop="id" />
       <el-table-column label="类别名" prop="categoryName" />
       <el-table-column align="right">
-        <template slot="header" slot-scope="scope">
-          <div class="searchWrapper">
-            <el-input
-              v-model="search"
-              size="mini"
-              placeholder="输入关键字搜索：enter"
-              @keyup.enter.native="fetchcategoryList"
-            />
-            <el-button size="mini" @click="reset" type="success">重置</el-button>
-          </div>
-        </template>
         <template slot-scope="scope">
           <el-button size="mini" @click="handleEdit(scope.row)">编辑</el-button>
           <el-button
@@ -203,7 +200,7 @@ export default {
 
 <style>
 .addNew {
-  margin-bottom: 15px;
+  margin-bottom: 0px;
 }
 .searchWrapper {
   display: flex;
@@ -211,6 +208,15 @@ export default {
 }
 .searchWrapper .el-button {
   margin-left: 10px;
+}
+.el-button--success {
+    color: #FFF;
+    background-color: #75878a;
+    border-color: #75878a;
+}
+.el-button--success.is-active, .el-button--success:active {
+    background: #75878a;
+    border-color: #75878a;
 }
 .myPagination {
   margin-top: 20px;

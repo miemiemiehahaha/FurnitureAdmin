@@ -31,7 +31,7 @@ public class GoodsController {
 	@Qualifier("CategoryService")
 	private CategoryService categoryService;
 	/**
-     * ·µ»Ø/goodsÁÐ±í
+     * ï¿½ï¿½ï¿½ï¿½/goodsï¿½Ð±ï¿½
      */	
 	@RequestMapping("/getgoodsList")
 	@ResponseBody  
@@ -56,7 +56,7 @@ public class GoodsController {
             	result.put("goodsList", goodsList);
             	code=200;  
     			state="success";
-    			message="³É¹¦";
+    			message="ï¿½É¹ï¿½";
     			map.put("code", code);
     			map.put("state", state);	
     			map.put("message", message);
@@ -69,7 +69,7 @@ public class GoodsController {
             	result.put("goodsList", goodsList);
             	code=0;
     			state="fail";
-    			message="Ê§°Ü";
+    			message="Ê§ï¿½ï¿½";
     			map.put("code", code);
     			map.put("state", state);	
     			map.put("message", message);
@@ -85,7 +85,7 @@ public class GoodsController {
         	result.put("goodsList", goodsList);
         	code=0;
 			state="fail";
-			message="Ê§°Ü";
+			message="Ê§ï¿½ï¿½";
 			map.put("code", code);
 			map.put("state", state);	
 			map.put("message", message);
@@ -96,7 +96,7 @@ public class GoodsController {
 	}
 	
 	/**
-     * ·µ»Ø/goodsÏêÇé
+     * ï¿½ï¿½ï¿½ï¿½/goodsï¿½ï¿½ï¿½ï¿½
      */	
 	@RequestMapping("/getgoodsDetail")
 	@ResponseBody  
@@ -118,7 +118,7 @@ public class GoodsController {
 				goodsDetailList.putAll(category);
 				code=200;
     			state="success";
-    			message="³É¹¦";
+    			message="ï¿½É¹ï¿½";
     			map.put("code", code);
     			map.put("state", state);	
     			map.put("message", message);
@@ -128,7 +128,7 @@ public class GoodsController {
 			}else{
 				code=0;
     			state="fail";
-    			message="Ê§°Ü";
+    			message="Ê§ï¿½ï¿½";
     			map.put("code", code);
     			map.put("state", state);	
     			map.put("message", message);
@@ -140,7 +140,7 @@ public class GoodsController {
 			System.out.println(e);
         	code=0;
 			state="fail";
-			message="Ê§°Ü";
+			message="Ê§ï¿½ï¿½";
 			map.put("code", code);
 			map.put("state", state);	
 			map.put("message", message);
@@ -152,7 +152,7 @@ public class GoodsController {
 	
 	
 	/**
-     * ÊµÏÖ/goodsÐÞ¸Ä¹¦ÄÜ
+     * Êµï¿½ï¿½/goodsï¿½Þ¸Ä¹ï¿½ï¿½ï¿½
      */	
 	@RequestMapping("/updateGoods")
 	@ResponseBody  
@@ -164,47 +164,47 @@ public class GoodsController {
 		try{
 			if(id != 0){
 				goodsService.UpdateGoods(id, goodsName, categoryID, picInfo, inPrice, quantity, detail, size, color, remark);
-				message = "³É¹¦";
+				message = "ï¿½É¹ï¿½";
 				result.put("message", message);
             	code=200;
     			state="success";
-    			message="³É¹¦";
+    			message="ï¿½É¹ï¿½";
     			map.put("code", code);
     			map.put("state", state);	
     			map.put("message", message);
     			map.put("result", result);
-//    			System.out.println(JSON.toJSONString(map));
+    			System.out.println(JSON.toJSONString(map));
         		return map;
 			}else{
-				message = "Ê§°Ü";
+				message = "Ê§ï¿½ï¿½";
 				result.put("message", message);
             	code=0;
     			state="fail";
-    			message="Ê§°Ü";
+    			message="Ê§ï¿½ï¿½";
     			map.put("code", code);
     			map.put("state", state);	
     			map.put("message", message);
     			map.put("result", result);
-//    			System.out.println(map);
+    			System.out.println(map);
         		return map;
 				}
 		}catch(Exception e){
 			System.out.println(e);
-			message = "Ê§°Ü";
+			message = "Ê§ï¿½ï¿½";
 			result.put("message", message);
         	code=0;
 			state="fail";
-			message="Ê§°Ü";
+			message="Ê§ï¿½ï¿½";
 			map.put("code", code);
 			map.put("state", state);	
 			map.put("message", message);
 			map.put("result", result);
-//			System.out.println(map);
+			System.out.println(map);
     		return map;
 		}
 	}
 	/**
-     * ÊµÏÖ/goodsÌí¼Ó¹¦ÄÜ
+     * Êµï¿½ï¿½/goodsï¿½ï¿½Ó¹ï¿½ï¿½ï¿½
      */	
 	@RequestMapping("/AddGoods")
 	@ResponseBody  
@@ -217,11 +217,11 @@ public class GoodsController {
 			if(goodsName != null){
 
 				goodsService.AddGoods(goodsName, categoryID, picInfo, inPrice, quantity, detail, size, color, remark);
-				message = "³É¹¦";
+				message = "ï¿½É¹ï¿½";
 				result.put("message", message);
 	            code=200;
 	    		state="success";
-	    		message="³É¹¦";
+	    		message="ï¿½É¹ï¿½";
 	    		map.put("code", code);
 	    		map.put("state", state);	
 	    		map.put("message", message);
@@ -229,11 +229,11 @@ public class GoodsController {
 //	    		System.out.println(JSON.toJSONString(map));
 	        	return map;
 				}else{
-					message = "Ê§°Ü";
+					message = "Ê§ï¿½ï¿½";
 					result.put("message", message);
 	            	code=0;
 	    			state="fail";
-	    			message="Ê§°Ü";
+	    			message="Ê§ï¿½ï¿½";
 	    			map.put("code", code);
 	    			map.put("state", state);	
 	    			map.put("message", message);
@@ -244,11 +244,11 @@ public class GoodsController {
 			
 		}catch(Exception e){
 			System.out.println(e);
-			message = "Ê§°Ü";
+			message = "Ê§ï¿½ï¿½";
 			result.put("message", message);
         	code=0;
 			state="fail";
-			message="Ê§°Ü";
+			message="Ê§ï¿½ï¿½";
 			map.put("code", code);
 			map.put("state", state);	
 			map.put("message", message);
@@ -258,7 +258,7 @@ public class GoodsController {
 		}
 	}
 	/**
-     * ÊµÏÖ/goodsÉ¾³ý¹¦ÄÜ
+     * Êµï¿½ï¿½/goodsÉ¾ï¿½ï¿½ï¿½ï¿½
      */	
 	@RequestMapping("/DeleteGoods")
 	@ResponseBody  
@@ -275,11 +275,11 @@ public class GoodsController {
 					goodsService.DeleteGoods(id);
 					
 				}
-				message = "³É¹¦";
+				message = "ï¿½É¹ï¿½";
 				result.put("message", message);
             	code=200;
     			state="success";
-    			message="³É¹¦";
+    			message="ï¿½É¹ï¿½";
     			map.put("code", code);
     			map.put("state", state);	
     			map.put("message", message);
@@ -287,11 +287,11 @@ public class GoodsController {
 //    			System.out.println(JSON.toJSONString(map));
         		return map;
 			}else{
-				message = "Ê§°Ü";
+				message = "Ê§ï¿½ï¿½";
 				result.put("message", message);
             	code=0;
     			state="fail";
-    			message="Ê§°Ü";
+    			message="Ê§ï¿½ï¿½";
     			map.put("code", code);
     			map.put("state", state);	
     			map.put("message", message);
@@ -301,11 +301,11 @@ public class GoodsController {
 			}
 		}catch(Exception e){
 			System.out.println(e);
-			message = "Ê§°Ü";
+			message = "Ê§ï¿½ï¿½";
 			result.put("message", message);
         	code=0;
 			state="fail";
-			message="Ê§°Ü";
+			message="Ê§ï¿½ï¿½";
 			map.put("code", code);
 			map.put("state", state);	
 			map.put("message", message);

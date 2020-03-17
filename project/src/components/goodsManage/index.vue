@@ -75,7 +75,7 @@
             <el-input v-model="goodsInfoDetail.id" :disabled="!isAdd" autocomplete="off"></el-input>
           </el-form-item>
           <el-form-item label="品牌名:" :label-width="'80px'">
-            <el-input v-model="goodsInfoDetail.goodsName" :disabled="!isAdd" autocomplete="off"></el-input>
+            <el-input v-model="goodsInfoDetail.goodsName"  autocomplete="off"></el-input>
           </el-form-item>
           <el-form-item label="性质:" :label-width="'80px'" v-if="isAdd">
             <el-input v-model="goodsInfoDetail.color" autocomplete="off"></el-input>
@@ -91,6 +91,9 @@
           </el-form-item>
           <el-form-item label="描述:" :label-width="'80px'">
             <el-input type="textarea" v-model="goodsInfoDetail.detail" autocomplete="off"></el-input>
+          </el-form-item>
+          <el-form-item label="类别ID:" :label-width="'80px'">
+            <el-input v-model="goodsInfoDetail.categoryID"  autocomplete="off"></el-input>
           </el-form-item>
           <el-form-item label="图片:" :label-width="'80px'">
             <el-input v-model="goodsInfoDetail.picInfo" autocomplete="off"></el-input>
@@ -162,7 +165,8 @@ export default {
         quantity: "",
         inPrice: "",
         detail: "",
-        picInfo: ""
+        picInfo: "",
+        categoryID:""
       };
       this.isAdd = true;
       this.drawerShow = true;
@@ -170,18 +174,19 @@ export default {
     addOrUpdate() {
       const url = this.isAdd
         ? "/FurnitureAdm/AddGoods"
-        : "/FurnitureAdm/updateGoods";
+        : "/FurnitureAdm/updateGoods"
       this.$axios({
         url,
         method: "POST",
         data: this.$qs.stringify({
-          id: this.goodsInfoDetail.id || "",
+          id: this.goodsInfoDetail.id,
           goodsName: this.goodsInfoDetail.goodsName,
           color: this.goodsInfoDetail.color,
           size: this.goodsInfoDetail.size,
           quantity: this.goodsInfoDetail.quantity,
           inPrice: this.goodsInfoDetail.inPrice,
           detail: this.goodsInfoDetail.detail,
+          categoryID: this.goodsInfoDetail.categoryID,
           picInfo: this.goodsInfoDetail.picInfo
         })
       }).then(({ data }) => {
