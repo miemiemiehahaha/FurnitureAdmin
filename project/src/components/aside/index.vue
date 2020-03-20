@@ -24,6 +24,7 @@ export default {}
   height: 100%;
 }
 .nav .item {
+  list-style: none;
   widows: 100%;
   height: 50px;
   text-align: center;

@@ -10,6 +10,7 @@ public class goods {
 	private String detail;
 	private String size;
 	private String color;
+	
 	public Integer getId() {
 		return id;
 	}

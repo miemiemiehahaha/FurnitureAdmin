@@ -24,7 +24,7 @@ public class CategoryController {
 	private CategoryService categoryService;
 	
 	/**
-     * ����/category�Ĳ�ѯ�б�
+     * 锟斤拷锟斤拷/category锟侥诧拷询锟叫憋拷
      */	
     @RequestMapping("/getcategoryList")
     @ResponseBody
@@ -50,7 +50,7 @@ public class CategoryController {
             	result.put("list", categoryList);
             	code=200;  
     			state="success";
-    			message="�ɹ�";
+    			message="锟缴癸拷";
     			map.put("code", code);
     			map.put("state", state);	
     			map.put("message", message);
@@ -63,7 +63,7 @@ public class CategoryController {
             	result.put("list", categoryList);
             	code=0;
     			state="fail";
-    			message="ʧ��";
+    			message="失锟斤拷";
     			map.put("code", code);
     			map.put("state", state);	
     			map.put("message", message);
@@ -78,7 +78,7 @@ public class CategoryController {
         	result.put("list", categoryList);
         	code=0;
 			state="fail";
-			message="ʧ��";
+			message="失锟斤拷";
 			map.put("code", code);
 			map.put("state", state);	
 			map.put("message", message);
@@ -89,7 +89,7 @@ public class CategoryController {
     }
     
     /**
-     * ����/category�õ�����
+     * 锟斤拷锟斤拷/category锟矫碉拷锟斤拷锟斤拷
      */	
     @RequestMapping("/getCategoryDetail")
 	@ResponseBody  
@@ -103,7 +103,7 @@ public class CategoryController {
 				categoryDetail = categoryService.CategoryDetail(category, id);
 				code=200;
     			state="success";
-    			message="�ɹ�";
+    			message="锟缴癸拷";
     			map.put("code", code);
     			map.put("state", state);	
     			map.put("message", message);
@@ -113,7 +113,7 @@ public class CategoryController {
 			}else{
 				code=0;
     			state="fail";
-    			message="ʧ��";
+    			message="失锟斤拷";
     			map.put("code", code);
     			map.put("state", state);	
     			map.put("message", message);
@@ -125,7 +125,7 @@ public class CategoryController {
 			System.out.println(e);
         	code=0;
 			state="fail";
-			message="ʧ��";
+			message="失锟斤拷";
 			map.put("code", code);
 			map.put("state", state);	
 			map.put("message", message);
@@ -137,12 +137,12 @@ public class CategoryController {
     }
     
 	/**
-     * ʵ��/category�޸�
+     * 实锟斤拷/category锟睫革拷
      */	
     @RequestMapping("/categoryUpdate")
 	@ResponseBody  
 	public Map<String, Object> updateCategory(Integer id, String categoryName, String remark) {
-		System.out.println(id + "," + categoryName +","+remark);
+//		System.out.println(id + "," + categoryName +","+remark);
     	Map<String, Object> result = new HashMap<String, Object>();
 		Map<String, Object> map = new HashMap<String, Object>();
 		int code;
@@ -150,11 +150,11 @@ public class CategoryController {
 		try{
 			if(id != 0){
 				categoryService.UpdateCategory(id, categoryName, remark);
-				message = "�ɹ�";
+				message = "锟缴癸拷";
 				result.put("message", message);
             	code=200;
     			state="success";
-    			message="�ɹ�";
+    			message="锟缴癸拷";
     			map.put("code", code);
     			map.put("state", state);	
     			map.put("message", message);
@@ -162,11 +162,11 @@ public class CategoryController {
 //    			System.out.println(JSON.toJSONString(map));
         		return map;
 			}else{
-				message = "ʧ��";
+				message = "失锟斤拷";
 				result.put("message", message);
             	code=0;
     			state="fail";
-    			message="ʧ��";
+    			message="失锟斤拷";
     			map.put("code", code);
     			map.put("state", state);	
     			map.put("message", message);
@@ -176,11 +176,11 @@ public class CategoryController {
 			}
 		}catch(Exception e){
 			System.out.println(e);
-			message = "ʧ��";
+			message = "失锟斤拷";
 			result.put("message", message);
         	code=0;
 			state="fail";
-			message="ʧ��";
+			message="失锟斤拷";
 			map.put("code", code);
 			map.put("state", state);	
 			map.put("message", message);
@@ -191,7 +191,7 @@ public class CategoryController {
     }
     
 	/**
-     * ʵ��/category��ӹ���
+     * 实锟斤拷/category锟斤拷庸锟斤拷锟�
      */	
 	@RequestMapping("/addCategory")
 	@ResponseBody  
@@ -208,11 +208,11 @@ public class CategoryController {
 				searchCategoryName = categoryService.SearchCategoryName(categoryName);
 				if(searchCategoryName == null){
 					categoryService.AddCategory(categoryName, remark);
-					message = "�ɹ�";
+					message = "锟缴癸拷";
 					result.put("message", message);
 	            	code=200;
 	    			state="success";
-	    			message="�ɹ�";
+	    			message="锟缴癸拷";
 	    			map.put("code", code);
 	    			map.put("state", state);	
 	    			map.put("message", message);
@@ -220,12 +220,12 @@ public class CategoryController {
 //	    			System.out.println(JSON.toJSONString(map));
 	        		return map;
 				}else{
-					message = "��ͼ������Ѵ��ڣ�";
+					message = "此商品已存在！";
 //					result.put("flag", flag);
 					result.put("message", message);
 	            	code=200;
 	    			state="fail";
-	    			message="ʧ��";
+	    			message="失锟斤拷";
 	    			map.put("code", code);
 	    			map.put("state", state);	
 	    			map.put("message", message);
@@ -234,11 +234,11 @@ public class CategoryController {
 	        		return map;
 				}
 			}else{
-				message = "ʧ��";
+				message = "失锟斤拷";
 				result.put("message", message);
             	code=0;
     			state="fail";
-    			message="ʧ��";
+    			message="失锟斤拷";
     			map.put("code", code);
     			map.put("state", state);	
     			map.put("message", message);
@@ -248,11 +248,11 @@ public class CategoryController {
 			}
 		}catch(Exception e ){
 			System.out.println(e);
-			message = "ʧ��";
+			message = "失锟斤拷";
 			result.put("message", message);
         	code=0;
 			state="fail";
-			message="ʧ��";
+			message="失锟斤拷";
 			map.put("code", code);
 			map.put("state", state);	
 			map.put("message", message);
@@ -262,7 +262,7 @@ public class CategoryController {
 		}
 	}
 	/**
-     * ʵ��/categoryɾ����
+     * 实锟斤拷/category删锟斤拷锟斤拷
      */	
 	@RequestMapping("/deleteCategory")
 	@ResponseBody  
@@ -275,11 +275,11 @@ public class CategoryController {
 		try{
 			if(id != 0){
 				categoryService.DeleteCategory(id);
-				message = "�ɹ�";
+				message = "锟缴癸拷";
 				result.put("message", message);
             	code=200;
     			state="success";
-    			message="�ɹ�";
+    			message="锟缴癸拷";
     			map.put("code", code);
     			map.put("state", state);	
     			map.put("message", message);
@@ -288,11 +288,11 @@ public class CategoryController {
         		return map;
 				
 			}else{
-				message = "ʧ��";
+				message = "失锟斤拷";
 				result.put("message", message);
             	code=0;
     			state="fail";
-    			message="ʧ��";
+    			message="失锟斤拷";
     			map.put("code", code);
     			map.put("state", state);	
     			map.put("message", message);
@@ -302,11 +302,11 @@ public class CategoryController {
 			}
 		}catch(Exception e){
 			System.out.println(e);
-			message = "ʧ��";
+			message = "失锟斤拷";
 			result.put("message", message);
         	code=0;
 			state="fail";
-			message="ʧ��";
+			message="失锟斤拷";
 			map.put("code", code);
 			map.put("state", state);	
 			map.put("message", message);

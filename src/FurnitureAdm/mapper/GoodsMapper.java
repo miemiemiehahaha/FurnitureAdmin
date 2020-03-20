@@ -32,12 +32,12 @@ public interface GoodsMapper {
 	Map<String, Object> getGoodsDetail(goods Goods, @Param("id")Integer id);
 	
 	//产品修改
-	@Update("update goods set goodsName = #{goodsName},categoryID=#{categoryID},picInfo=#{picInfo},inPrice=#{inPrice},quantity=#{quantity},detail=#{detail},size=#{size},color=#{color} ,remark = #{remark}where id=#{id}")
-	void updategoods(@Param("id")Integer id, @Param("goodsName")String goodsName,  @Param("categoryID")String categoryID,@Param("picInfo")String picInfo, @Param("inPrice")String inPrice, @Param("quantity")String quantity, @Param("detail")String detail,@Param("size")String size,@Param("color")String color, @Param("remark")String remark);
+	@Update("update goods set goodsName = #{goodsName},categoryID=#{categoryID},picInfo=#{picInfo},inPrice=#{inPrice},quantity=#{quantity},detail=#{detail},size = #{goodsize},color=#{color},remark = #{remark} where id=#{id}")
+	void updategoods(@Param("id")Integer id, @Param("goodsName")String goodsName,  @Param("categoryID")String categoryID,@Param("picInfo")String picInfo, @Param("inPrice")String inPrice, @Param("quantity")String quantity, @Param("detail")String detail,@Param("goodsize")String goodsize,@Param("color")String color, @Param("remark")String remark);
 
 	//产品添加
-	@Insert("insert into goods(goodsName,categoryID,picInfo,inPrice,quantity,detail,size,color,remark)")
-	void addGoods( @Param("goodsName")String goodsName,  @Param("categoryID")String categoryID,@Param("picInfo")String picInfo, @Param("inPrice")String inPrice, @Param("quantity")String quantity, @Param("detail")String detail,@Param("size")String size,@Param("color")String color, @Param("remark")String remark);
+	@Insert("insert into goods(goodsName,categoryID,picInfo,inPrice,quantity,detail,size,color,remark) values(#{goodsName},#{categoryID},#{picInfo},#{inPrice},#{quantity},#{detail},#{goodsize},#{color},#{remark})")
+	void addGoods( @Param("goodsName")String goodsName,  @Param("categoryID")String categoryID,@Param("picInfo")String picInfo, @Param("inPrice")String inPrice, @Param("quantity")String quantity, @Param("detail")String detail,@Param("goodsize")String goodsize,@Param("color")String color, @Param("remark")String remark);
 
 	@Select("select * from goods where goodsName=#{goodsName}")
 	Map<String, Object> sreachGoodsName(@Param("goodsName")String goodsName);

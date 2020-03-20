@@ -156,15 +156,24 @@ public class GoodsController {
      */	
 	@RequestMapping("/updateGoods")
 	@ResponseBody  
-	public Map<String, Object> updateGoods(Integer id, String goodsName, String categoryID, String picInfo, String inPrice, String quantity,  String detail, String size, String color, String remark) {
+	public Map<String, Object> updateGoods(Integer goodsid, String goodsName, String categoryID, String picInfo, String inPrice, String quantity,  String detail, String goodsize, String color, String remark) {
+//		System.out.println(goodsid+","+goodsName+","+categoryID+","+picInfo+","+inPrice+","+quantity+","+detail+","+size+","+color);
 		Map<String, Object> result = new HashMap<String, Object>();
 		Map<String, Object> map = new HashMap<String, Object>();
 		int code;
 		String state, message;	
 		try{
+<<<<<<< HEAD
 			if(id != 0){
 				goodsService.UpdateGoods(id, goodsName, categoryID, picInfo, inPrice, quantity, detail, size, color, remark);
 				message = "ï¿½É¹ï¿½";
+=======
+			if(goodsid != 0){
+				Integer id = goodsid;
+//				System.out.println(getType(id));
+				goodsService.UpdateGoods(id, goodsName, categoryID, picInfo, inPrice, quantity, detail, goodsize,color, remark);
+				message = "³É¹¦";
+>>>>>>> master
 				result.put("message", message);
             	code=200;
     			state="success";
@@ -203,12 +212,14 @@ public class GoodsController {
     		return map;
 		}
 	}
+
 	/**
      * Êµï¿½ï¿½/goodsï¿½ï¿½Ó¹ï¿½ï¿½ï¿½
      */	
 	@RequestMapping("/AddGoods")
 	@ResponseBody  
-	public Map<String, Object> AddGoods(String goodsName, String categoryID, String picInfo,String inPrice, String quantity,  String detail, String size, String color, String remark) {
+	public Map<String, Object> AddGoods(String goodsName, String categoryID, String picInfo,String inPrice, String quantity,  String detail, String goodsize, String color, String remark) {
+//		System.out.println(getType(goodsize));
 		Map<String, Object> result = new HashMap<String, Object>();
 		Map<String, Object> map = new HashMap<String, Object>();
 		int code;
@@ -216,8 +227,13 @@ public class GoodsController {
 		try{
 			if(goodsName != null){
 
+<<<<<<< HEAD
 				goodsService.AddGoods(goodsName, categoryID, picInfo, inPrice, quantity, detail, size, color, remark);
 				message = "ï¿½É¹ï¿½";
+=======
+				goodsService.AddGoods(goodsName, categoryID, picInfo, inPrice, quantity, detail, goodsize, color, remark);
+				message = "³É¹¦";
+>>>>>>> master
 				result.put("message", message);
 	            code=200;
 	    		state="success";
