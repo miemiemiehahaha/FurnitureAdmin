@@ -11,6 +11,9 @@
       <router-link class="item" tag="li" to="/goodsManage"
         >产品管理</router-link
       >
+      <router-link class="item" tag="li" to="/data_view"
+        >数据统计</router-link
+      >
     </ul>
   </div>
 </template>
