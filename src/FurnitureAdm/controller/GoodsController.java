@@ -31,7 +31,7 @@ public class GoodsController {
 	@Qualifier("CategoryService")
 	private CategoryService categoryService;
 	/**
-     * ����/goods�б�
+     * 锟斤拷锟斤拷/goods锟叫憋拷
      */	
 	@RequestMapping("/getgoodsList")
 	@ResponseBody  
@@ -56,7 +56,7 @@ public class GoodsController {
             	result.put("goodsList", goodsList);
             	code=200;  
     			state="success";
-    			message="�ɹ�";
+    			message="成功";
     			map.put("code", code);
     			map.put("state", state);	
     			map.put("message", message);
@@ -69,7 +69,7 @@ public class GoodsController {
             	result.put("goodsList", goodsList);
             	code=0;
     			state="fail";
-    			message="ʧ��";
+    			message="失锟斤拷";
     			map.put("code", code);
     			map.put("state", state);	
     			map.put("message", message);
@@ -85,7 +85,7 @@ public class GoodsController {
         	result.put("goodsList", goodsList);
         	code=0;
 			state="fail";
-			message="ʧ��";
+			message="失锟斤拷";
 			map.put("code", code);
 			map.put("state", state);	
 			map.put("message", message);
@@ -96,7 +96,7 @@ public class GoodsController {
 	}
 	
 	/**
-     * ����/goods����
+     * 锟斤拷锟斤拷/goods锟斤拷锟斤拷
      */	
 	@RequestMapping("/getgoodsDetail")
 	@ResponseBody  
@@ -118,7 +118,7 @@ public class GoodsController {
 				goodsDetailList.putAll(category);
 				code=200;
     			state="success";
-    			message="�ɹ�";
+    			message="锟缴癸拷";
     			map.put("code", code);
     			map.put("state", state);	
     			map.put("message", message);
@@ -128,7 +128,7 @@ public class GoodsController {
 			}else{
 				code=0;
     			state="fail";
-    			message="ʧ��";
+    			message="失锟斤拷";
     			map.put("code", code);
     			map.put("state", state);	
     			map.put("message", message);
@@ -140,7 +140,7 @@ public class GoodsController {
 			System.out.println(e);
         	code=0;
 			state="fail";
-			message="ʧ��";
+			message="失锟斤拷";
 			map.put("code", code);
 			map.put("state", state);	
 			map.put("message", message);
@@ -152,7 +152,7 @@ public class GoodsController {
 	
 	
 	/**
-     * ʵ��/goods�޸Ĺ���
+     * 实锟斤拷/goods锟睫改癸拷锟斤拷
      */	
 	@RequestMapping("/updateGoods")
 	@ResponseBody  
@@ -163,21 +163,17 @@ public class GoodsController {
 		int code;
 		String state, message;	
 		try{
-<<<<<<< HEAD
-			if(id != 0){
-				goodsService.UpdateGoods(id, goodsName, categoryID, picInfo, inPrice, quantity, detail, size, color, remark);
-				message = "�ɹ�";
-=======
+
 			if(goodsid != 0){
 				Integer id = goodsid;
 //				System.out.println(getType(id));
 				goodsService.UpdateGoods(id, goodsName, categoryID, picInfo, inPrice, quantity, detail, goodsize,color, remark);
-				message = "�ɹ�";
->>>>>>> master
+				message = "成功";
+
 				result.put("message", message);
             	code=200;
     			state="success";
-    			message="�ɹ�";
+    			message="锟缴癸拷";
     			map.put("code", code);
     			map.put("state", state);	
     			map.put("message", message);
@@ -185,11 +181,11 @@ public class GoodsController {
     			System.out.println(JSON.toJSONString(map));
         		return map;
 			}else{
-				message = "ʧ��";
+				message = "失锟斤拷";
 				result.put("message", message);
             	code=0;
     			state="fail";
-    			message="ʧ��";
+    			message="失锟斤拷";
     			map.put("code", code);
     			map.put("state", state);	
     			map.put("message", message);
@@ -199,11 +195,11 @@ public class GoodsController {
 				}
 		}catch(Exception e){
 			System.out.println(e);
-			message = "ʧ��";
+			message = "失锟斤拷";
 			result.put("message", message);
         	code=0;
 			state="fail";
-			message="ʧ��";
+			message="失锟斤拷";
 			map.put("code", code);
 			map.put("state", state);	
 			map.put("message", message);
@@ -214,7 +210,7 @@ public class GoodsController {
 	}
 
 	/**
-     * ʵ��/goods��ӹ���
+     * 实锟斤拷/goods锟斤拷庸锟斤拷锟�
      */	
 	@RequestMapping("/AddGoods")
 	@ResponseBody  
@@ -227,17 +223,13 @@ public class GoodsController {
 		try{
 			if(goodsName != null){
 
-<<<<<<< HEAD
-				goodsService.AddGoods(goodsName, categoryID, picInfo, inPrice, quantity, detail, size, color, remark);
-				message = "�ɹ�";
-=======
 				goodsService.AddGoods(goodsName, categoryID, picInfo, inPrice, quantity, detail, goodsize, color, remark);
-				message = "�ɹ�";
->>>>>>> master
+				message = "成功";
+
 				result.put("message", message);
 	            code=200;
 	    		state="success";
-	    		message="�ɹ�";
+	    		message="锟缴癸拷";
 	    		map.put("code", code);
 	    		map.put("state", state);	
 	    		map.put("message", message);
@@ -245,11 +237,11 @@ public class GoodsController {
 //	    		System.out.println(JSON.toJSONString(map));
 	        	return map;
 				}else{
-					message = "ʧ��";
+					message = "失锟斤拷";
 					result.put("message", message);
 	            	code=0;
 	    			state="fail";
-	    			message="ʧ��";
+	    			message="失锟斤拷";
 	    			map.put("code", code);
 	    			map.put("state", state);	
 	    			map.put("message", message);
@@ -260,11 +252,11 @@ public class GoodsController {
 			
 		}catch(Exception e){
 			System.out.println(e);
-			message = "ʧ��";
+			message = "失锟斤拷";
 			result.put("message", message);
         	code=0;
 			state="fail";
-			message="ʧ��";
+			message="失锟斤拷";
 			map.put("code", code);
 			map.put("state", state);	
 			map.put("message", message);
@@ -274,7 +266,7 @@ public class GoodsController {
 		}
 	}
 	/**
-     * ʵ��/goodsɾ����
+     * 实锟斤拷/goods删锟斤拷锟斤拷
      */	
 	@RequestMapping("/DeleteGoods")
 	@ResponseBody  
@@ -291,11 +283,11 @@ public class GoodsController {
 					goodsService.DeleteGoods(id);
 					
 				}
-				message = "�ɹ�";
+				message = "锟缴癸拷";
 				result.put("message", message);
             	code=200;
     			state="success";
-    			message="�ɹ�";
+    			message="锟缴癸拷";
     			map.put("code", code);
     			map.put("state", state);	
     			map.put("message", message);
@@ -303,11 +295,11 @@ public class GoodsController {
 //    			System.out.println(JSON.toJSONString(map));
         		return map;
 			}else{
-				message = "ʧ��";
+				message = "失锟斤拷";
 				result.put("message", message);
             	code=0;
     			state="fail";
-    			message="ʧ��";
+    			message="失锟斤拷";
     			map.put("code", code);
     			map.put("state", state);	
     			map.put("message", message);
@@ -317,11 +309,11 @@ public class GoodsController {
 			}
 		}catch(Exception e){
 			System.out.println(e);
-			message = "ʧ��";
+			message = "失锟斤拷";
 			result.put("message", message);
         	code=0;
 			state="fail";
-			message="ʧ��";
+			message="失锟斤拷";
 			map.put("code", code);
 			map.put("state", state);	
 			map.put("message", message);

@@ -6,7 +6,7 @@
 <script>
 import Echarts from 'echarts'
 export default {
-  name: "",
+  
   data() {
     return {
       mockData: [
@@ -104,12 +104,20 @@ export default {
             myChart.setOption({
               xAxis: [
                 {
+<<<<<<< Updated upstream
                   data: x //将异步请求获取到的数据进行装载
+=======
+                  data: res.data.goodsID //将异步请求获取到的数据进行装载
+>>>>>>> Stashed changes
                 }
               ],
               series: [
                 {
+<<<<<<< Updated upstream
                   data: num
+=======
+                  data: res.data.num
+>>>>>>> Stashed changes
                 }
               ]
             });
