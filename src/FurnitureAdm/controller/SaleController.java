@@ -40,7 +40,7 @@ public class SaleController {
 	@RequestMapping("/SaleView")
 	@ResponseBody
 	
-	public Map<String,Object> SaleView(orderItem OrderItem) {
+	public List<Map<String,Object>> SaleView(orderItem OrderItem) {
 
 		List<Map<String, Object>> SaleList = new ArrayList<Map<String, Object>>();
 		List<Map<String, Object>> CategoryIDList = new ArrayList<Map<String, Object>>();
@@ -70,33 +70,23 @@ public class SaleController {
 //					System.out.println(JSON.toJSONString(SaleList));
 				}
 				AllList.addAll(SaleList);
-				System.out.println(JSON.toJSONString(SaleList));
-//				FinaList.addAll(SaleList);
-				
-				flag = 1;
-				code = 200;
-				message = "成功";
-				state="success";
-				map.put("图表", AllList);
-				map.put("code", code);
-				map.put("state", state);	
-				map.put("message", message);
-				map.put("flag", flag);
-		//		req.setAttribute("图表", FinaList);
-		//		System.out.println(JSON.toJSONString(map));
-				return map;
+//				System.out.println(JSON.toJSONString(AllList));
+
+//				flag = 1;
+//				code = 200;
+//				message = "成功";
+//				state="success";
+//				map.put("图表", AllList);
+//				map.put("code", code);
+//				map.put("state", state);	
+//				map.put("message", message);
+//				map.put("flag", flag);
+//		//		req.setAttribute("图表", FinaList);
+//		//		System.out.println(JSON.toJSONString(map));
+				return AllList;
 			}else{
-				flag = 0;
-				code = 0;
-				message = "失败";
-				state="fail";
-				
-				map.put("code", code);
-				map.put("state", state);	
-				map.put("message", message);
-				map.put("flag", flag);
-//				System.out.println(JSON.toJSONString(map));
-				return map;
+
+				return null;
 			}
 
 			
@@ -238,17 +228,17 @@ public class SaleController {
 			
 		}catch(Exception e){
 //			System.out.println(e);
-			flag = 0;
-			code = 0;
-			message = "失败";
-			state="fail";
-			
-			map.put("code", code);
-			map.put("state", state);	
-			map.put("message", message);
-			map.put("flag", flag);
-			System.out.println(JSON.toJSONString(map));
-			return map;
+//			flag = 0;
+//			code = 0;
+//			message = "失败";
+//			state="fail";
+//			
+//			map.put("code", code);
+//			map.put("state", state);	
+//			map.put("message", message);
+//			map.put("flag", flag);
+//			System.out.println(JSON.toJSONString(map));
+			return null;
 		}
 	}
 	
