@@ -27,17 +27,24 @@ public class SaleServiceImpl implements SaleService  {
 
 
 	@Override
-	public List<Map<String, Object>> GetcategoryName(orderItem OrderItem,
+	public List<Map<String, Object>> GetcategoryName(
 			Integer FinalcategoryID) {
 		// TODO Auto-generated method stub
-		return SaleMapper.getcategoryName(OrderItem, FinalcategoryID);
+		return SaleMapper.getcategoryName( FinalcategoryID);
 	}
 
 
 	@Override
-	public List<Map<String, Object>> GetcategoryID(Integer categoryID) {
+	public List<Map<String, Object>> GetcategoryID(Integer goodsid) {
 		// TODO Auto-generated method stub
-		return SaleMapper.getCategoryID(categoryID);
+		return SaleMapper.getCategoryID(goodsid);
+	}
+
+
+	@Override
+	public Map<String, Object> GetgoodsName(Integer goodsid) {
+		// TODO Auto-generated method stub
+		return SaleMapper.getgoodsName(goodsid);
 	}
 
 

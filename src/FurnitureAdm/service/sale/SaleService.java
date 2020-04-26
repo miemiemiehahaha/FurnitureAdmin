@@ -11,8 +11,10 @@ public interface SaleService {
 	List<Map<String, Object>> SaleList(orderItem OrderItem);
 	
 	//获取goods的categoryName
-	List<Map<String, Object>> GetcategoryName(orderItem OrderItem, Integer FinalcategoryID);
+	List<Map<String, Object>> GetcategoryName(Integer FinalcategoryID);
 	
 	//获取categoryID
-	List<Map<String, Object>> GetcategoryID( Integer categoryID);
+	List<Map<String, Object>> GetcategoryID( Integer goodsid);
+	
+	Map<String, Object> GetgoodsName( Integer goodsid);
 }
