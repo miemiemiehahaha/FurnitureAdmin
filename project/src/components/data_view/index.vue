@@ -201,6 +201,12 @@ export default {
           let num = res.data.map(item => {
             return item.num;
           });
+          let orderDate = res.data.map(item => {
+            return item.orderDate;
+          });
+          let totalNum = res.data.map(item => {
+            return item.totalNum;
+          });
           setTimeout(() => {
             // 获取到数据后隐藏加载动画
             myChart.hideLoading();
@@ -238,7 +244,7 @@ export default {
                   type: "category",
                   name: "日期",
                   boundaryGap: false,
-                  data: []
+                  data: orderDate
                 },
                 {
                   gridIndex: 1,
@@ -274,7 +280,7 @@ export default {
                 {
                   xAxisIndex: 0,
                   yAxisIndex: 0,
-                  date:[],
+                  date:totalNum,
                   name: "日期",
                   type: "line",
                   smooth: true,
