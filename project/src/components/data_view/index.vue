@@ -90,12 +90,12 @@ export default {
       this.$axios
         .post("/FurnitureAdm/SaleView")
         .then(res => {
-          // console.log(res)
+           console.log(res)
           let x = res.data.map(item => {
-            return item.categoryname
+            return item.goodsName
           })
           let num = res.data.map(item => {
-            return item.saledata
+            return item.num
           })
           setTimeout(() => {
             // 获取到数据后隐藏加载动画
@@ -104,20 +104,12 @@ export default {
             myChart.setOption({
               xAxis: [
                 {
-<<<<<<< Updated upstream
                   data: x //将异步请求获取到的数据进行装载
-=======
-                  data: res.data.goodsID //将异步请求获取到的数据进行装载
->>>>>>> Stashed changes
                 }
               ],
               series: [
                 {
-<<<<<<< Updated upstream
                   data: num
-=======
-                  data: res.data.num
->>>>>>> Stashed changes
                 }
               ]
             });
