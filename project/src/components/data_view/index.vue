@@ -91,10 +91,10 @@ export default {
         .post("/FurnitureAdm/SaleView")
         .then(res => {
            console.log(res)
-          let x = res.data.map(item => {
+          let x = res.data.list(item => {
             return item.goodsName
           })
-          let num = res.data.map(item => {
+          let num = res.data.list(item => {
             return item.num
           })
           setTimeout(() => {
