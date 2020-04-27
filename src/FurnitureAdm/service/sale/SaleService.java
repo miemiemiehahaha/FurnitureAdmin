@@ -15,6 +15,6 @@ public interface SaleService {
 	
 	//获取categoryID
 	List<Map<String, Object>> GetcategoryID( Integer goodsid);
-	
+	//获取goodsName
 	Map<String, Object> GetgoodsName( Integer goodsid);
 }
