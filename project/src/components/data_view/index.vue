@@ -9,24 +9,24 @@ import Echarts from "echarts";
 export default {
   data() {
     return {
-      mockData: [
-        {
-          goodsId: 1,
-          num: 10
-        },
-        {
-          goodsId: 2,
-          num: 20
-        },
-        {
-          goodsId: 3,
-          num: 30
-        },
-        {
-          goodsId: 4,
-          num: 40
-        }
-      ],
+      // mockData: [
+      //   {
+      //     goodsId: 1,
+      //     num: 10
+      //   },
+      //   {
+      //     goodsId: 2,
+      //     num: 20
+      //   },
+      //   {
+      //     goodsId: 3,
+      //     num: 30
+      //   },
+      //   {
+      //     goodsId: 4,
+      //     num: 40
+      //   }
+      // ],
       options: {
         // title: {
         //   text: "销售量前十的产品统计图"
@@ -64,7 +64,7 @@ export default {
           },
           // #2  柱状图名称
           {
-            text: "销售量前十的产品",
+            text: "销售量前十的品牌",
             x: "0%",
             y: "50%",
             textStyle: {
@@ -244,7 +244,7 @@ export default {
                   type: "category",
                   name: "日期",
                   boundaryGap: false,
-                  data: orderDate
+                  data: orderDate,
                 },
                 {
                   gridIndex: 1,
