@@ -9,7 +9,6 @@ export default {
   data() {
     return {
       options: {
-
         title: [
           // #1  折线图名称
           {
@@ -20,7 +19,16 @@ export default {
               fontSize: 15
             }
           },
-          // #2  柱状图名称
+          // #2  饼图名称
+          {
+            text: "各类别销售数据统计图",
+            x: "55%",
+            y: "0%",
+            textStyle: {
+              fontSize: 15
+            }
+          },
+          // #3  柱状图名称
           {
             text: "销售量前十的品牌",
             x: "0%",
@@ -39,13 +47,20 @@ export default {
         grid: [
           {
             left: "5%",
-            right: "10%",
+            right: "50%",
             top: "10%",
             bottom: "50%",
             containLabel: true
           },
           {
-            gridindex: 1,
+            // gridindex: 1,
+            // left: "55%",
+            // right: "0%",
+            // top: "10%",
+            // bottom: "50%"
+          },
+          {
+            gridindex: 2,
             left: "5%",
             right: "10%",
             top: "62%",
@@ -62,7 +77,10 @@ export default {
             data: []
           },
           {
-            gridIndex: 1,
+            // 不需要数据
+          },
+          {
+            gridIndex: 2,
             name: "\n\n 产品名",
             type: "category",
             boundaryGap: true,
@@ -74,17 +92,14 @@ export default {
             gridIndex: 0,
             type: "value",
             name: "成交量"
-            //axisLabel: {
-            //formatter: '{value} %'
-            //},
           },
           {
-            gridIndex: 1,
+            // 不需要数据
+          },
+          {
+            gridIndex: 2,
             type: "value",
             name: "销售量"
-            //axisLabel: {
-            //    formatter: '{value} ℃'
-            //},
           }
         ],
         series: [
@@ -102,8 +117,12 @@ export default {
             }
           },
           {
-            xAxisIndex: 1,
-            yAxisIndex: 1,
+            name: "销售量",
+            type: "pie"
+          },
+          {
+            xAxisIndex: 2,
+            yAxisIndex: 2,
             name: "销售量",
             type: "bar",
             itemStyle: {
@@ -137,6 +156,7 @@ export default {
         .post("/FurnitureAdm/SaleView")
         .then(res => {
           // console.log(res);
+          //折线图数据
           let goodsName = res.data.map(item => {
             return item.goodsName;
           });
@@ -144,6 +164,17 @@ export default {
             return item.num;
           });
 
+          //饼图数据
+          let piedata = [];
+          res.data.forEach(item => {
+            if (item.categoryName && item.newnum) {
+              piedata.push({ name: item.categoryName, value: item.newnum });
+              return piedata;
+            }
+          });
+          // console.log(piedata);
+
+          //条形图数据
           let orderDate = [];
           res.data.forEach(item => {
             if (item.orderDate) {
@@ -168,7 +199,10 @@ export default {
               //将异步请求获取到的数据进行装载
               xAxis: [
                 {
-                  data: orderDate 
+                  data: orderDate
+                },
+                {
+                  // data: piedata
                 },
                 {
                   data: goodsName.slice(0, 10),
@@ -181,6 +215,16 @@ export default {
               series: [
                 {
                   data: totalNum
+                },
+                {
+                  tooltip: {
+                    trigger: "item",
+                    formatter: "{a} <br/>{b} : {c} ({d}%)"
+                  },
+                  center: ["78%", "30%"],
+                  radius: "45%",
+                  roseType: "area",
+                  data: piedata
                 },
                 {
                   data: num.slice(0, 10)
