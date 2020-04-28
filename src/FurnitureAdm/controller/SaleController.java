@@ -59,7 +59,7 @@ public class SaleController {
 		List<Map<String,Object>> List = new ArrayList<Map<String,Object>>(); 
 //		Map<String, Object> CategoryNameList = new HashMap<String, Object>();
 		List<Map<String, Object>> OrderList = new ArrayList<Map<String, Object>>();
-//		List<Map<String,Object>> CategoryNameList = new ArrayList<Map<String,Object>>(); 
+		List<Map<String,Object>> SaleList1 = new ArrayList<Map<String,Object>>(); 
 		List<Map<String, Object>> FinaList = new ArrayList<Map<String, Object>>();
 		List<Map<String, Object>> AllList = new ArrayList<Map<String, Object>>();
 		Map<String, Object> GoodsNameList = new HashMap<String, Object>();
@@ -90,12 +90,12 @@ public class SaleController {
 				}
 				AllList.addAll(SaleList);		
 				AllList.addAll(OrderList);
-				SaleList = echartsCategoryService.getSaleList(OrderItem);
+				SaleList1 = echartsCategoryService.getSaleList(OrderItem);
 //				System.out.println(JSON.toJSONString(SaleList));
 			
-					for(int i=0;i<SaleList.size();i++){
-						goodsid = Integer.parseInt(SaleList.get(i).get("goodsid").toString());
-						num = SaleList.get(i).get("num").toString();
+					for(int i=0;i<SaleList1.size();i++){
+						goodsid = Integer.parseInt(SaleList1.get(i).get("goodsid").toString());
+						num = SaleList1.get(i).get("num").toString();
 						int idx = num.lastIndexOf(".");
 						String strNum = num.substring(0,idx);
 						int Newnum = Integer.valueOf(strNum);
