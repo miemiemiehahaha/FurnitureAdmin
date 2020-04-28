@@ -22,9 +22,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
+import FurnitureAdm.bean.Category;
 import FurnitureAdm.bean.goods;
 import FurnitureAdm.bean.order;
 import FurnitureAdm.bean.orderItem;
+import FurnitureAdm.service.echartscategory.EchartsCategoryService;
 import FurnitureAdm.service.orderEcharts.OrderEchartsService;
 import FurnitureAdm.service.sale.SaleService;
 
@@ -43,6 +45,10 @@ public class SaleController {
 	@Qualifier("OrderEchartsService")
 	private OrderEchartsService orderEchartsService;
 	
+	@Autowired
+	@Qualifier("EchartsCategoryService")
+	private EchartsCategoryService echartsCategoryService;
+	
 	@RequestMapping("/SaleView")
 	@ResponseBody
 	
@@ -50,18 +56,24 @@ public class SaleController {
 
 		List<Map<String, Object>> SaleList = new ArrayList<Map<String, Object>>();
 		List<Map<String, Object>> CategoryIDList = new ArrayList<Map<String, Object>>();
-//		List<Map<String,Object>> GoodsNameList = new ArrayList<Map<String,Object>>(); 
+		List<Map<String,Object>> List = new ArrayList<Map<String,Object>>(); 
 //		Map<String, Object> CategoryNameList = new HashMap<String, Object>();
 		List<Map<String, Object>> OrderList = new ArrayList<Map<String, Object>>();
-		List<Map<String,Object>> CategoryNameList = new ArrayList<Map<String,Object>>(); 
+//		List<Map<String,Object>> CategoryNameList = new ArrayList<Map<String,Object>>(); 
 		List<Map<String, Object>> FinaList = new ArrayList<Map<String, Object>>();
 		List<Map<String, Object>> AllList = new ArrayList<Map<String, Object>>();
 		Map<String, Object> GoodsNameList = new HashMap<String, Object>();
-		Map<String, Object> map = new HashMap<String, Object>();
-
+		List<Map<String,Object>> Category = new ArrayList<Map<String,Object>>(); 
+		Map<String, Object> CategoryNameList = new HashMap<String, Object>();
 		Integer goodsid ;
 		Integer FinalcategoryID = null ;
 		Integer finall = null;
+	
+		String num;
+		Integer categoryID;
+		int code;
+		String state, message;
+	
 
 		try{
 		
@@ -76,10 +88,66 @@ public class SaleController {
 					SaleList.get(i).putAll(GoodsNameList);
 //					System.out.println(JSON.toJSONString(SaleList));
 				}
-				AllList.addAll(SaleList);
-				
+				AllList.addAll(SaleList);		
 				AllList.addAll(OrderList);
-				System.out.println(JSON.toJSONString(AllList));
+				SaleList = echartsCategoryService.getSaleList(OrderItem);
+//				System.out.println(JSON.toJSONString(SaleList));
+			
+					for(int i=0;i<SaleList.size();i++){
+						goodsid = Integer.parseInt(SaleList.get(i).get("goodsid").toString());
+						num = SaleList.get(i).get("num").toString();
+						int idx = num.lastIndexOf(".");
+						String strNum = num.substring(0,idx);
+						int Newnum = Integer.valueOf(strNum);
+//						System.out.println(Newnum);
+						CategoryIDList = echartsCategoryService.getcategoryID(goodsid);
+
+						for(int j = 0;j<CategoryIDList.size();j++){
+						
+							FinalcategoryID = Integer.parseInt(CategoryIDList.get(j).get("categoryID").toString());
+//							System.out.println(FinalcategoryID);
+							Category = echartsCategoryService.getcategoryName(FinalcategoryID);
+							for(int k =0;k<Category.size();k++){
+								String categoryname = Category.get(k).get("categoryName").toString();
+								CategoryNameList.put("categoryName", categoryname);
+							}
+							
+						
+							CategoryNameList.put("newnum", Newnum);
+//							System.out.println(JSON.toJSONString(CategoryNameList));
+							CategoryIDList.get(j).putAll(CategoryNameList);
+
+						}
+
+						List.addAll(CategoryIDList);
+//						System.out.println(JSON.toJSONString(AllList));
+					}
+					
+					Map<String, Map<String, Object>> result = new HashMap<String, Map<String,Object>>();
+			 
+			        for(Map<String, Object> key : List){
+			            String categoryName = key.get("categoryName").toString();
+//			            System.out.println(categoryName);
+			            String cID = key.get("categoryID").toString();
+//			            System.out.println(cID);
+			            String newId  = categoryName+cID;
+			            Long newnum = Long.parseLong(key.get("newnum").toString());
+//			            System.out.println(newnum);
+			            if(result.containsKey(newId)){
+			                Long temp = Long.parseLong(result.get(newId).get("newnum").toString());
+//			                System.out.println(temp);
+			                newnum += temp;
+//			                System.out.println(newnum);
+			                result.get(newId).put("newnum", newnum);
+//			                System.out.println(JSON.toJSONString(result));
+			                continue;
+			            }
+			            result.put(newId, key);
+			            FinaList.add(key);
+//			            System.out.println(JSON.toJSONString(FinaList));
+			        }
+			        AllList.addAll(FinaList);
+//				System.out.println(JSON.toJSONString(AllList));
 				return AllList;
 			}else{
 
