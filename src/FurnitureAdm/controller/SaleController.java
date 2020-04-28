@@ -121,6 +121,8 @@ public class SaleController {
 
 						List.addAll(CategoryIDList);
 //						System.out.println(JSON.toJSONString(AllList));
+						List.get(i).remove("categoryID");
+						System.out.println(JSON.toJSONString(List));
 					}
 					
 					Map<String, Map<String, Object>> result = new HashMap<String, Map<String,Object>>();
@@ -128,21 +130,21 @@ public class SaleController {
 			        for(Map<String, Object> key : List){
 			            String categoryName = key.get("categoryName").toString();
 //			            System.out.println(categoryName);
-			            String cID = key.get("categoryID").toString();
+//			            String cID = key.get("categoryID").toString();
 //			            System.out.println(cID);
-			            String newId  = categoryName+cID;
+//			            String newId  = categoryName+cID;
 			            Long newnum = Long.parseLong(key.get("newnum").toString());
 //			            System.out.println(newnum);
-			            if(result.containsKey(newId)){
-			                Long temp = Long.parseLong(result.get(newId).get("newnum").toString());
+			            if(result.containsKey(categoryName)){
+			                Long temp = Long.parseLong(result.get(categoryName).get("newnum").toString());
 //			                System.out.println(temp);
 			                newnum += temp;
 //			                System.out.println(newnum);
-			                result.get(newId).put("newnum", newnum);
+			                result.get(categoryName).put("newnum", newnum);
 //			                System.out.println(JSON.toJSONString(result));
 			                continue;
 			            }
-			            result.put(newId, key);
+			            result.put(categoryName, key);
 			            FinaList.add(key);
 //			            System.out.println(JSON.toJSONString(FinaList));
 			        }
